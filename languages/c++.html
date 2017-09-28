@@ -1,0 +1,1545 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>C++</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+    <meta name="robots" content="noindex">
+	
+	
+	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+  <link rel="stylesheet" type="text/css" href="project.css">
+	
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<!-- creating nav bar and the id's to drop to-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+
+  <ul class="nav navbar-nav">
+    <li><a href="#section0">Top</a></li>
+	<li><a href="#section1">Hash Table</a></li>
+	<li><a href="#section2">Binary Search Tree</a></li>
+	<li><a href="#section3">Calculator + GUI</a></li>
+	
+	<li><a href="../index.html">Home</a></li>
+   </ul>
+</nav>
+
+
+<!-- TOP Info-->
+<div id = "section0">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">C++ projects</h1>
+  <p class="lead">Below is just a few samples of some of my C++ projects. 
+				  Many other personal projects and tasks of mine exist and 
+				  can be seen upon request. I chose to ommit them 
+				  from this page as to not make it unneccesarily long.</p>
+  <hr class="my-4">
+   
+</div>
+</div>
+</div>
+
+
+<!-- Section 1-->
+<div id = "section1">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">Data Structures: Hash Table:</h1>
+  <p class="lead">Implimentation of a Hash Table with various uses. One such being reading in a data file, and returning various info</p>
+  <hr class="my-4">
+   
+  <h2>Make File</h2>
+  <code>
+	<xmp>
+		all: part1.exe part2.exe
+
+
+
+part1.exe: part1.cpp HashMap.cpp HashNode.cpp 
+	g++ part1.cpp HashMap.cpp HashNode.cpp -std=c++11 -o part1.exe
+	
+part2.exe: part2.cpp HashMap.cpp HashNode.cpp 
+	g++ part2.cpp HashMap.cpp HashNode.cpp -std=c++11 -o part2.exe	
+	</xmp>
+  </code>
+  <h2>HashMap.h</h2>
+  <code>
+  <xmp>
+	
+#ifndef HASHMAP_H
+#define HASHMAP_H
+#include <string>
+#include "HashNode.h"
+using namespace std;
+
+
+
+class HashMap
+{
+    private:
+     public:
+        HashNode** htable;
+
+        HashMap(int size);
+
+        ~HashMap();
+         ///Hash Function
+
+        int getBucket(string key);
+
+        void insert(string key, int value);
+
+
+        void Remove(string key);
+
+        void resize(int newSize);
+
+        int size();
+        int get(string key);
+
+        bool contains(string key);
+        void print();
+        void getLargest();
+         void getLargest2();
+
+
+        int TABLE_SIZE = 0;
+        int setSize = 0;
+};
+
+#endif // HASHMAP_H
+
+
+ </xmp>
+  </code>
+<h3>HashMap.cpp</h3>
+
+<code>
+<xmp>
+
+
+#include "HashMap.h"
+#include "HashNode.h"
+#include <iostream>
+#include <cassert>
+#include <algorithm>
+#include <stdexcept>
+#include <vector>
+
+
+using namespace std;
+
+bool HashMap::contains(string key){
+    int bucketNum = getBucket(key);
+HashNode* current = htable[bucketNum];
+    // traverse the list
+    while(current != nullptr) {
+        if(current->key == key){
+              return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
+void HashMap::Remove(string key) {
+    if(key == " " || key == "#")
+        throw invalid_argument("Invalid value");
+    int bucketNumber = getBucket(key);
+    //try to find item
+    while(htable[bucketNumber]->key != " ") {
+        if( htable[bucketNumber]->key == key ){
+            htable[bucketNumber]->key = "#";
+            cout << "Deleting key " << key << endl;
+            return;
+        }
+        htable[bucketNumber] = htable[bucketNumber]->next;
+    }
+}
+
+        HashMap::HashMap(int size){
+            TABLE_SIZE = size;
+            htable = new HashNode*[TABLE_SIZE];
+            for (int i = 0; i < TABLE_SIZE; i++)
+                htable[i] = nullptr;
+        }
+
+        HashMap::~HashMap(){
+            for (int i = 0; i < TABLE_SIZE; ++i){
+                HashNode* entry = htable[i];
+               while (entry != nullptr)
+            {
+                    HashNode* prev = entry;
+                    entry = entry->next;
+                    delete prev;
+                }
+            }
+            delete[] htable;
+        }
+
+        int HashMap::getBucket(string key) {
+            hash<string> hasher;
+            unsigned int hashValue = hasher(key);  //technicall type is size_t
+            //return that mapped onto table
+            return hashValue % TABLE_SIZE;
+
+        }
+
+        void HashMap::insert(string key, int value){
+            if(this->contains(key) == false){
+                setSize++;
+                int hash_val = getBucket(key);
+                HashNode* prev = nullptr;
+                HashNode* entry = htable[hash_val];
+                while (entry != nullptr){
+                    prev = entry;
+                   entry = entry->next;
+                }
+                if (entry == nullptr){
+                    entry = new HashNode(key, value);
+                    if (prev == nullptr){
+                        htable[hash_val] = entry;
+                    }
+                    else{
+                        prev->next = entry;
+                    }
+                }
+                else{
+                    entry->value = value;
+                }
+            }
+            else{
+                int bucketNum = this->getBucket(key);
+                HashNode* entry = htable[bucketNum];
+                if(entry->key == key){
+                    entry->value = value;
+                    htable[bucketNum] = entry;
+                }
+            }
+///---------if more than half full, resize storage to be 2n+1 size
+            if(setSize > 0.5 * TABLE_SIZE){
+                    resize((TABLE_SIZE * 2) + 1);
+            }
+        }
+
+        int HashMap::get(string key){
+            int hash_val = getBucket(key);
+            HashNode* entry = htable[hash_val];
+            while (entry != nullptr){
+                if(entry->key == key){
+                cout << entry->value << endl;
+                return entry->value;
+                }
+                entry = entry->next;
+            }
+        }
+
+        int HashMap::size(){
+            return setSize;
+        }
+
+
+        void HashMap::resize(int newSize) {
+                    int oldTableSize = TABLE_SIZE;
+                   TABLE_SIZE = newSize;
+                    //maxSize = (int) (TABLE_SIZE * threshold);
+                   HashNode **oldTable = htable;
+                    htable = new HashNode*[TABLE_SIZE];
+                    for (int i = 0; i <TABLE_SIZE; i++)
+                          htable[i] = nullptr;
+                    for (int i = 0; i < oldTableSize; i++)
+                          if (oldTable[i] != nullptr) {
+                                HashNode *oldEntry;
+                                HashNode *entry = oldTable[i];
+                                while (entry != nullptr) {
+                                     insert(entry->key, entry->value);
+                                     oldEntry = entry;
+                                     entry = entry->next;
+                                     delete oldEntry;
+                               }
+                          }
+                    delete[] oldTable;
+              }
+
+        void HashMap::print(){
+            for(int i = 0; i < TABLE_SIZE; i++){
+                if(htable[i] != nullptr){
+                    if(htable[i]->key != " " && htable[i]->key != "#"){
+                        cout << htable[i]->key << "/" << htable[i]->value << " ";
+                        htable[i] = htable[i]->next;
+                    }
+                    cout << endl;
+                }
+            }
+        }
+
+
+        void HashMap::getLargest(){
+                   int largest = 0;
+                   string word = "";
+                   int curCount = 0;
+                while (curCount < 10){
+                   for(int i = 0; i < TABLE_SIZE; i++){
+                       if(htable[i] != nullptr){
+                           if(htable[i]->key == "#"){
+                               htable[i] = htable[i]->next;
+                           }
+                           if( largest < htable[i]->value ){
+                               largest = htable[i]->value;
+                               word = htable[i]->key;
+                               htable[i] = htable[i]->next;
+
+                           }
+                       }
+
+                       curCount++;
+               }
+ cout <<largest<<"    :    "<<word<<'\n';
+
+                }
+       }
+
+
+
+        void HashMap::getLargest2(){
+            int largest = 0;
+            string word = "";
+            vector<int> vecInts;
+            vector<string> vecString;
+            int curCount = 0;
+         while (curCount < 10){
+            for(int i = 0; i < TABLE_SIZE; i++){
+                if(htable[i] != nullptr){
+                    if(htable[i]->key == "#"){
+                        htable[i] = htable[i]->next;
+                    }
+                    if (vecInts.size() < 10){
+                    if( largest < htable[i]->value ){
+                        largest = htable[i]->value;
+                        word = htable[i]->key;
+                        vecInts.push_back(largest);
+                        vecString.push_back(word);
+                        htable[i] = htable[i]->next;
+
+                    }
+                    }
+                    else if ( largest < htable[i]->value ){
+                        largest = htable[i]->value;
+                        word = htable[i]->key;
+                       for (int k =0; k < 10; k++){
+                        vecInts.at(k) == largest;
+                        vecString.at(k) == word;
+                        if (k == 9){
+                            k = 0;
+                        }
+                       }
+                        htable[i] = htable[i]->next;
+
+                    }
+
+
+                }
+
+
+            }
+
+                curCount ++;
+        }
+
+         for (vector<int>::iterator it = vecInts.begin() ; it != vecInts.end(); ++it)
+            cout << ' ' << *it << '\n';
+         for (vector<string>::iterator its = vecString.begin() ; its != vecString.end(); ++its)
+            cout << ' ' << *its << '\n';
+}
+
+
+
+
+
+
+
+        //    for(int i = 0; i < 10000; i++){
+        //        //while(words.htable[i] != nullptr){
+        //         if (words.htable[i]->value != 0){
+        //            if(largest < words.htable[i]->value){
+        //                largest = words.htable[i]->value;
+        //               if (words.htable[i] -> next !=nullptr){
+        //                words.htable[i]->value = words.htable[i]->next->value;
+        //            }
+
+        //            }
+        //        }
+        //      //  }
+        //    }
+
+
+  </xmp>
+  </code>
+  
+  
+ <h3>HashNode.cpp and .h</h3> 
+ <code>
+ <xmp>
+ 
+#include "HashNode.h"
+
+using namespace std;
+
+HashNode::HashNode(){
+    this->key = " ";
+    this->value = 0;
+    this->next = nullptr;
+}
+
+
+HashNode::HashNode(string key, int value){
+    this->key = key;
+    this->value = value;
+    this->next = nullptr;
+}
+
+
+bool HashNode::operator != (string maybe){
+    if(this->key != maybe){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+bool HashNode::operator == ( string maybe){
+    if(this->key == maybe){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+ 
+ </xmp>
+ </code>
+ <h3>HashNode.h</h3>
+
+<code>
+ <xmp>
+ 
+#ifndef HASHNODE_H
+#define HASHNODE_H
+#include <string>
+using namespace std;
+
+
+class HashNode{
+    public:
+    string key;
+    int value;
+
+    HashNode* next;
+        HashNode(string key, int value);
+
+
+       HashNode();
+        bool operator != (string maybe);
+
+
+        bool operator == ( string maybe);
+
+
+};
+
+#endif // HASHNODE_H
+
+ 
+ </xmp>
+ </code>
+   
+   
+ <h3>Main functions:</h3> 
+ <code>
+ <xmp>
+ 
+#include <iostream>
+#include <cstdlib>
+#include <algorithm>
+#include <string>
+#include <set>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include "HashMap.h"
+#include "HashNode.h"
+using namespace std;
+
+int main(){
+    fstream myfile;
+    myfile.open ("bible.txt");
+    string bibleStuffs;
+///-----------------------read in whole file to bibleStuffs
+    while(!myfile.eof()){
+        string temp;
+        getline (myfile, temp);
+        bibleStuffs.append(temp);
+
+    }
+
+///-----------------------change to lowercase
+    int length = bibleStuffs.length();
+
+    transform(bibleStuffs.begin(), bibleStuffs.end(), bibleStuffs.begin(),(int (*)(int))tolower);
+///-----------------------add stuff to hashma
+    HashMap words(10000);
+    string b2 = bibleStuffs;
+    for(int i = 0; i < length; i++){
+        //find next space
+        int spaceLocation = b2.find(" ");
+        //set temp to that wor
+        string temp = b2.substr(0, spaceLocation);
+        b2.erase(0, spaceLocation + 1);
+        //add temp to hashmap
+        if(words.contains(temp) == false){
+            words.insert(temp, 1);
+        }
+        else{
+            int bucketNum = words.getBucket(temp);
+            HashNode* entry = words.htable[bucketNum];
+            if(entry->key == temp){
+                entry->value = entry->value + 1;
+                words.htable[bucketNum] = entry;
+                if(b2.empty()== true){
+                   break;
+                }
+            }
+        }
+    }
+
+    cout<<"Running: words.get begat.... \n";
+    cout << words.get("begat") << '\n';
+
+
+
+    cout<<"Running: words.getLargest.... \n";
+    for(int i = 0; i < 10; i++){
+
+         words.getLargest();
+
+    }
+    }
+}
+ 
+ </xmp>
+ </code>
+  
+  
+  
+  </div> 
+</div>
+</div>
+
+
+
+
+
+
+
+<!-- Section 2-->
+<div id = "section2">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">Data Structures: Binary Search Tree:</h1>
+  <p class="lead">BST with below functionality</p>
+  <hr class="my-4">
+  <h2>MakeFile:</h2>
+  <code>
+	<xmp>
+		all: part1.exe part2.exe
+
+
+
+
+part1.exe: part1.o
+	g++ part1.o -o part1.exe -std=c++11 
+
+part2.exe: part2.o
+	g++ part2.o -o part2.exe -std=c++11 
+
+	
+part1.o: part1.cpp
+	g++ part1.cpp -c -std=c++11
+
+part2.o: part2.cpp
+	g++ part2.cpp -c -std=c++11
+	</xmp>
+  </code>
+  <h2>function 1 and function 2:</h2>
+  <code>
+  <xmp>
+	
+
+#include <iostream>
+#include <ctime>
+#include <vector>
+#include "Set.h"
+
+using namespace std;
+
+int main(){
+    MySet <int> test;
+    clock_t adding = clock();
+
+
+    for(int i = 0; i < 5; i++){
+
+        int r1 = (rand() % 100);         // v1 in the range 0-99
+        int r2 = rand() % 1000;      // v2 in the range 0-999
+
+
+
+        r1 = r1 * 1000;
+        int random = r1 + r2;
+        test.add(random);
+    }
+
+    clock_t count = clock() - adding;
+    double sec = (1.0 * count / CLOCKS_PER_SEC);
+
+    cout<< "adding took "<< sec << " seconds " << endl;
+    cout << "The number of items in the set are: " << test.size() << endl;
+    cout << "The depth of the set is: " << test.depth() << endl;
+
+
+        cout << "The largest in the set is: " << test.extractLargest() << endl;
+        for (int i = 0; i < 4; i++){
+        cout << "The largest in the set now is: " << test.extractLargest() << endl;
+
+    }
+
+
+
+//        MySet <int> mult_of_two;
+//        ///2 from 2-1000
+//        for(int i = 10; i > 1; i - 2){
+//            mult_of_two.add(i);
+//        }
+
+//        MySet <int> mult_of_five;
+//        ///5 from 2-1000
+//        for(int i = 10; i > 1; i - 5){
+//            mult_of_five.add(i);
+//        }
+
+//        MySet <int> mult_of_two;
+//        ///2 from 2-1000
+//            mult_of_two.add(2);
+//            mult_of_two.add(8);
+//            mult_of_two.add(12);
+
+//        mult_of_two.add(12);
+
+
+//        MySet <int> mult_of_five;
+//        ///5 from 2-100
+//            mult_of_five.add(6);
+//            mult_of_five.add(12);
+//            mult_of_five.add(10);
+
+
+//        mult_of_two.unionWith(mult_of_five);
+
+//        cout << mult_of_two.depth() << endl;
+//        cout << mult_of_two.size() << endl;
+
+}
+ </xmp>
+  </code>
+<h3>part 2:</h3>
+
+<code>
+<xmp>
+
+#include <iostream>
+#include <ctime>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include "Set.h"
+
+using namespace std;
+
+int main(){
+
+    MySet<string> words;
+    string temp;
+    fstream myfile;
+        myfile.open ("WordsRandomized.txt");
+        int i = 1;
+
+        while (i <= 10000){
+
+                    getline(myfile, temp);
+             words.addWords(temp);
+             i++;
+
+}
+
+
+}
+
+  </xmp>
+  </code>
+  
+  
+ <h3>set.h</h3> 
+ <code>
+ <xmp>
+ 
+ 
+#ifndef SET
+#define SET
+#include "MySetNode.h"
+#include <vector>
+
+using namespace std;
+
+
+template <class T>
+class MySet {
+public:  ///Public to allow testing of helper functions outside the class
+    MySetNode<T>* root;
+    ///Constructors/assignment op
+    MySet();
+    MySet(const MySet& other);
+
+    MySet& operator=(const MySet& other);
+    ///Destructor - deletes any child nodes
+    ~MySet();
+    void copy(MySetNode<T>* root);
+    void duplicateSubTree(MySetNode<T>* startNode);
+    bool contains(T item);
+    MySet<T> unionWith(const MySet& other);
+    void deleteSubTree(MySetNode<T>* startNode);
+    T findLargest() const;
+    bool addWords(T value);
+    bool add(T value);
+    int size();
+    int depth();
+    bool remove(T item);
+    T extractLargest();
+
+};
+
+///if looked at in debugger it adds everthing but makes a linked list.
+template<class T>
+MySet<T> MySet<T>::unionWith(const MySet& other) {
+
+    vector<T> v_one;
+    MySet<T> otherCopy;
+
+    otherCopy.copy(other.root);
+    int y = root->nodeCount;
+    for(int i = 0; i < y/2; i++){
+        v_one.push_back(otherCopy.extractLargest());
+    }
+
+    for(int i = 0; i < v_one.size(); i++){
+        T num = v_one.at(i);
+        this->add(num);
+    }
+}
+
+
+template<class T>
+bool MySet<T>::add(T item){
+
+    MySetNode<T>* parent;
+    MySetNode<T>* current;
+    if (root == nullptr)
+        root = new MySetNode<T>(item);
+    else
+    {
+        // Locate the parent node
+        current = root;
+        while (current != nullptr)
+            if (item < current->item)
+            {
+                parent = current;
+                current = current->left;
+            }
+            else if (item > current->item)
+            {
+                parent = current;
+                current = current->right;
+            }
+            else
+                return false; // Duplicate node not inserted
+        // Create the new node and attach it to the parent node
+        if (item < parent->item)
+            parent->left = new MySetNode<T>(item);
+        else
+            parent->right = new MySetNode<T>(item);
+        return true; // item inserted
+    }
+}
+
+
+
+template<class T>
+int MySet<T>::depth(){
+
+    T max = 1;
+    T max2 = 1;
+    MySetNode<T>* current;
+    MySetNode<T>* parent;
+
+    current = this->root;
+    if(this->root == nullptr){
+        current = root;
+        return max;
+    }
+    else{
+        while(current!= nullptr){\
+            parent = current;
+            parent->item = current->item;
+            current = current->right;
+            max = max + 1;
+        }
+        while(current!= nullptr){
+            parent = current;
+            parent->item = current->item;
+            current = current->left;
+            max2 = max2 + 1;
+        }
+        if(max > max2){
+            return max;
+        }
+        else{
+            return max2;
+        }
+    }
+}
+
+
+
+
+template<class T>
+bool MySet<T>::addWords(T item){
+
+    MySetNode<T>* parent;
+    MySetNode<T>* current;
+    if (root == nullptr)
+        root = new MySetNode<T>(item);
+    else
+    {
+        // Locate the parent node
+        current = root;
+        while (current != nullptr)
+            if (item < current->item)
+            {
+                parent = current;
+                current = current->left;
+            }
+            else if (item > current->item)
+            {
+                parent = current;
+                current = current->right;
+            }
+            else
+                return false; // Duplicate node not inserted
+        // Create the new node and attach it to the parent node
+        if (parent->left == nullptr)
+            parent->left = new MySetNode<T>(item);
+        else
+            parent->right = new MySetNode<T>(item);
+        return true; // item inserted
+    }
+}
+
+
+template<class T>
+T MySet<T>::findLargest() const{
+    T max;
+    MySetNode<T>* current;
+    MySetNode<T>* parent;
+    current = this->root;
+    if(this->root == nullptr){
+        current = root;
+        return 0;
+    }
+    else{
+        while(current!= nullptr){\
+            parent = current;
+            parent->item = current->item;
+            current = current->right;
+            max = parent->item;
+        }
+        return max /*current->item*/;
+    }
+}
+
+template<class T>
+T MySet<T>::extractLargest(){
+    T max = findLargest();
+    remove(max);
+    return max;
+}
+
+
+template <class T>
+bool MySet<T>::remove(T item) {
+    // Locate the node to be deleted and also locate its parent node
+    MySetNode<T>* parent = nullptr;
+    MySetNode<T>* current = root;
+    while (current != nullptr)
+    {
+        if (item < current->item){
+            parent = current;
+            current = current->left;
+        }
+        else if (item > current->item){
+            parent = current;
+            current = current->right;
+        }
+        else
+            break; // item is in the tree pointed by current
+    }
+    if (current == nullptr)
+        return false;
+    // item is not in the tree
+    // Case 1: current has no left children
+    if (current->left == nullptr){
+        if (parent == nullptr){
+            root = current->right;
+        }
+        else
+        {
+            if (item < parent->item)
+                parent->left = current->right;
+            else
+                parent->right = current->right;
+        }
+        delete current; // Delete current
+    } else{
+        // the current node and also its parent
+        MySetNode<T>* parentOfRightMost = current;
+        MySetNode<T>* rightMost = current->left;
+        while (rightMost->right != nullptr){
+            parentOfRightMost = rightMost;
+            rightMost = rightMost->right; // Keep going to the right
+        }
+        // Replace the item in current by the item in rightMost
+        current->item = rightMost->item;
+        // Eliminate rightmost node
+        if (parentOfRightMost->right == rightMost)
+            parentOfRightMost->right = rightMost->left;
+        else
+            // Special case: parentOfRightMost->right == current
+            parentOfRightMost->left = rightMost->left;
+        delete rightMost; // Delete rightMost
+    }
+    return true; // item inserted
+}
+
+template <class T>
+bool MySet<T>::contains(T item){
+    if(searchHelp(root, item) == nullptr){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
+template <class T>
+void MySet<T>::deleteSubTree(MySetNode <T>* startNode) {
+    if(startNode == nullptr){
+        return;
+    }
+    deleteSubTree(startNode->left);
+    deleteSubTree(startNode->right);
+    delete startNode;
+}
+
+template <class T>
+MySetNode<T>* duplicateSubTree(MySetNode<T>* startNode) {
+    if(startNode == nullptr)
+        return nullptr;
+    MySetNode<T>* newNode = new MySetNode<T>(startNode->item);
+    newNode->left = duplicateSubTree(startNode->left);
+    newNode->right = duplicateSubTree(startNode->right);
+    return newNode;
+}
+
+
+template <typename T>
+void MySet<T>::copy(MySetNode<T>* root)
+{
+    if (root != NULL)
+    {
+        add(root->item);
+        copy(root->left);
+        copy(root->right);
+    }
+}
+
+template <class T>
+MySet<T>::MySet(const MySet& other) {
+    root = duplicateSubTree(other.root);
+}
+
+template <class T>
+MySet<T>::MySet(){
+    root = nullptr;
+}
+
+template <class T>
+MySet<T>::~MySet() {
+    deleteSubTree(root);
+}
+
+template <class T>
+MySet<T>& MySet<T>::operator=(const MySet& other){
+    if(this != &other){
+        deleteSubTree(root);
+        root =duplicateSubTree(other.root);
+    }
+    return *this;
+}
+
+template <class T>
+int MySet<T>::size(){
+    return this->root->nodeCount;
+}
+
+#endif // SET
+
+
+ </xmp>
+ </code>
+  
+  </div> 
+</div>
+</div>
+
+
+
+
+<!-- Section 3-->
+<div id = "section3">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">GUI Calculator with tester</h1>
+  <p class="lead">functional Calculator with a GUI</p>
+  <hr class="my-4">
+  
+   <h2>Calculator.cpp && .h</h2>
+   <h3>.h</h3>
+  <code>
+	<xmp>
+		
+#ifndef CALCULATOR_H
+#define CALCULATOR_H
+
+class Calculator {
+public:
+    friend class CalcGui;
+    Calculator();
+
+
+    enum opType
+    {
+        ADD ,
+        SUBTRACT ,
+        MULTIPLY ,
+        DIVIDE,
+        SQRT,
+        NONE
+    };
+
+    void store(double value);
+    double handleOperation(Calculator::opType newOperation);
+    double equalsPressed();
+    void clear();
+
+private:
+    double num1;
+    double num2;
+
+    double total;
+    opType oper;
+};
+#endif // CALCULATOR_H
+
+	</xmp>
+  </code>
+  
+  
+   <h2>.cpp</h2>
+  <code>
+	<xmp>
+		
+#include "Calculator.h"
+#include <cmath>
+#include <stdexcept>
+
+using namespace std;
+
+Calculator::Calculator() {
+    num1 = 0;
+    num2 = 0;
+    oper = NONE;
+}
+
+void Calculator::store(double value){
+
+    if(num2 == 0)
+        num2 = value;
+
+    else{
+        num1 = value;
+    }
+}
+
+double Calculator::handleOperation(Calculator::opType newOperation){
+    ///FIXME
+    if(oper == NONE){
+        oper = newOperation;
+        return num2;
+    }
+    else{
+
+        if(oper == ADD){
+            num1 = num2 + num1;
+            num2 = 0;
+        }
+        else if(oper == SUBTRACT){
+            num1 = num2;
+            num2 = 0;
+        }
+        else if(oper == MULTIPLY){
+            num1 = num2 * num1;
+            num2 = 0;
+        }
+        else if(oper == DIVIDE){
+            num1 = num2;
+            num2 = 0;
+        }
+        else if(oper == SQRT){
+            num1 = num2;
+            num2 = 0;
+
+        }
+    }
+    return 0;
+}
+
+
+double Calculator::equalsPressed() {
+
+
+    if(oper == ADD){
+        return num2 + num1;
+
+    }
+    else if(oper == SUBTRACT){
+        return num2 - num1;
+    }
+
+    else if(oper == MULTIPLY){
+        return num2 * num1;
+    }
+    else if(oper == DIVIDE){
+        return num2/num1;
+    }
+    else if(oper == SQRT){
+        return sqrt(num1);
+    }
+    return 0;
+}
+
+
+
+void Calculator::clear() {
+    num1 = 0;
+    num2 = 0;
+    oper = NONE;
+
+}
+
+	</xmp>
+  </code>
+  
+  <h2>Calculator gui .cpp</h2>
+  <code>
+  <xmp>
+	
+
+#include "CalculatorGui.h"
+#include "Calculator.h"
+#include <QPushButton>
+#include <QSizePolicy>
+#include <QLineEdit>
+#include <string>
+#include <QDialog>
+#include <iostream>
+#include <QLabel>
+#include <QGridLayout>
+
+
+using namespace std;
+
+CalculatorGui::CalculatorGui(QWidget *parent) :
+    QDialog(parent)
+{
+    //buttons for numbers
+    button0 = new QPushButton("0");
+    button1 = new QPushButton("1");
+    button2 = new QPushButton("2");
+    button3 = new QPushButton("3");
+    button4 = new QPushButton("4");
+    button5 = new QPushButton("5");
+    button6 = new QPushButton("6");
+    button7 = new QPushButton("7");
+    button8 = new QPushButton("8");
+    button9 = new QPushButton("9");
+
+    //buttons for operators
+    buttonDiv = new QPushButton("/");
+    buttonMult = new QPushButton("X");
+    buttonPlus = new QPushButton("+");
+    ButtonSub = new QPushButton("-");
+    buttonEquals = new QPushButton("=");
+    buttonPoint = new QPushButton(".");
+    buttonRec = new QPushButton("1/x");
+    buttonMod = new QPushButton("%");
+    buttonSqrt = new QPushButton("√X");
+    buttonClear = new QPushButton("C");
+    //--------------------------
+
+    QHBoxLayout* bottomishpanel = new QHBoxLayout;
+    bottomishpanel->addWidget(button0);
+    bottomishpanel->addWidget(buttonPoint);
+    bottomishpanel->addWidget(buttonPlus);
+    bottomishpanel->addWidget(buttonEquals);
+    bottomishpanel->addStretch();
+
+    QHBoxLayout* bottomPannel = new QHBoxLayout;
+    bottomPannel->addWidget(button1);
+    bottomPannel->addWidget(button2);
+    bottomPannel->addWidget(button3);
+    bottomPannel->addWidget(ButtonSub);
+    bottomPannel->addStretch();
+
+    QHBoxLayout* middlePannel = new QHBoxLayout;
+    middlePannel->addWidget(button4);
+    middlePannel->addWidget(button5);
+    middlePannel->addWidget(button6);
+    middlePannel->addWidget(buttonMult);
+    middlePannel->addWidget(buttonRec);
+    middlePannel->addStretch();
+
+    QHBoxLayout* topPannel = new QHBoxLayout;
+    topPannel->addWidget(button7);
+    topPannel->addWidget(button8);
+    topPannel->addWidget(button9);
+    topPannel->addWidget(buttonDiv);
+    topPannel->addWidget(buttonMod);
+    topPannel->addStretch();
+
+    QHBoxLayout* moreSoTopPannel = new QHBoxLayout;
+    moreSoTopPannel->addWidget(buttonSqrt);
+    moreSoTopPannel->addWidget(buttonClear);
+    moreSoTopPannel->addStretch();
+
+    QHBoxLayout* console = new QHBoxLayout;
+    lineEdit = new QLineEdit("");
+    console->addWidget(lineEdit);
+
+    QVBoxLayout* mainLayout = new QVBoxLayout;
+    mainLayout->addLayout(console);
+    mainLayout->addLayout(moreSoTopPannel);
+    mainLayout->addLayout(topPannel);
+    mainLayout->addLayout(middlePannel);
+    mainLayout->addLayout(bottomPannel);
+    mainLayout->addLayout(bottomishpanel);
+
+    setLayout(mainLayout);
+
+   //wiring the events
+
+
+    //operands
+    connect(buttonDiv, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(buttonMult, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(buttonPlus, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(ButtonSub, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(buttonEquals, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(buttonPoint, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(buttonRec, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(buttonMod, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(buttonSqrt, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(buttonClear, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    //button numbers
+    connect(button0, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button1, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button2, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button3, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button4, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button5, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button6, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button7, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button8, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+    connect(button9, SIGNAL(clicked()),
+            this, SLOT(buttonPressed()));
+
+}
+
+
+void CalculatorGui::buttonPressed(){
+    QObject* mySender = QObject::sender();
+
+    if(mySender == button1){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "1");
+    }
+
+
+    else if(mySender == button2){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "2");
+    }
+
+
+    else if(mySender == button3){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "3");
+    }
+
+
+    else if(mySender == button4){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "4");
+    }
+
+
+    else if(mySender == button5){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "5");
+    }
+
+    else if(mySender == button6){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "6");
+    }
+
+
+    else if(mySender == button7){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "7");
+    }
+
+    else if(mySender == button8){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "8");
+    }
+
+    else if(mySender == button9){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "9");
+    }
+
+
+    else if(mySender == button0){
+        QString text = lineEdit->text();
+        if(text.contains("+") || text.contains("X")|| text.contains("/")
+          || text.contains("-") || text.contains("%") || text.contains("√")){
+            lineEdit->setText("");
+        }
+        lineEdit->setText(lineEdit->text()+ "0");
+    }
+
+//----------- + / - X buttons---------------
+
+    else if(mySender == buttonPlus){
+        QString text = lineEdit->text();
+        bool ok;
+        double x = text.toDouble(&ok);
+        if(ok) {
+            calculatorEngine.store(x);
+            lineEdit->setText("+");
+            calculatorEngine.handleOperation(Calculator::ADD);
+
+        }
+    }
+
+
+    else if(mySender == buttonDiv){
+        QString text = lineEdit->text();
+        bool ok;
+        double x = text.toDouble(&ok);
+        if(ok) {
+            calculatorEngine.store(x);
+            lineEdit->setText("/");
+            calculatorEngine.handleOperation(Calculator::DIVIDE);
+        }
+    }
+
+    else if(mySender == buttonMult){
+        QString text = lineEdit->text();
+        bool ok;
+        double x = text.toDouble(&ok);
+        if(ok) {
+            calculatorEngine.store(x);
+            lineEdit->setText("X");
+            calculatorEngine.handleOperation(Calculator::MULTIPLY);
+
+        }
+    }
+
+
+    else if(mySender == ButtonSub){
+        QString text = lineEdit->text();
+        bool ok;
+        double x = text.toDouble(&ok);
+        if(ok) {
+            calculatorEngine.store(x);
+            lineEdit->setText("-");
+            calculatorEngine.handleOperation(Calculator::SUBTRACT);
+        }
+    }
+
+    //-----------------------//
+    else if(mySender == buttonEquals){
+        QString text = lineEdit->text();
+        bool ok;
+        double x = text.toDouble(&ok);
+        if(ok) {
+            calculatorEngine.store(x);
+
+            double x = calculatorEngine.equalsPressed();
+            QString result = QString::number(x);
+            lineEdit->setText(result);
+        }
+    }
+
+
+
+
+    else if(mySender == buttonClear){
+        lineEdit->setText("");
+        calculatorEngine.clear();
+    }
+
+
+}
+
+CalculatorGui::~CalculatorGui(){
+}
+
+ </xmp>
+  </code>
+
+ 
+  </div> 
+</div>
+</div>
+
+
+
+
+<footer>
+	<ul>
+			
+			<a href="../index.html">Home</a>
+	</ul>
+</footer>
+
+</body>
+</html>

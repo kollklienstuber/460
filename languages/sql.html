@@ -1,0 +1,277 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>SQL</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+    <meta name="robots" content="noindex">
+	
+	
+	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+  <link rel="stylesheet" type="text/css" href="lang.css">
+	
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<!-- creating nav bar and the id's to drop to-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+
+  <ul class="nav navbar-nav">
+    <li><a href="#section1">SQL Statments</a></li>
+	<li><a href="#section2">Numerical SQL Statements</a></li>
+	
+	<li><a href="../index.html">Home</a></li>
+   </ul>
+</nav>
+
+
+<div id = "section1">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">SQL Statments</h1>
+  <p class="lead">SQL Statements using the table of information provided. 
+  <img src="pics/sqlTable.PNG">
+  </p>
+  <hr class="my-4">
+  
+  <!--Code here-->
+<h3>Retrieve supplier numbers and part names for all parts shipped by more than one supplier without using GROUP BY in your query.</h3>
+<code>
+<xmp>
+select sno, pname 
+from sp join p on sp.pno = p.pno 
+where exists (select * 
+from sp join sp as sp2 on sp.pno = sp2.pno
+where sp.sno != sp2.sno
+and p.pno = sp2.pno )
+
+</xmp>
+</code>
+
+
+<h3>Retrieve part names for parts supplied by all suppliers that have a status greater than 25.</h3>
+<code>
+<xmp>
+select pname from p
+where not exists 
+(select * 
+from s join sp as sp2 on sp2.sno = s.sno 
+where s.status > 25 
+and not exists (
+select * from sp 
+where   p.pno = sp.pno
+and s.sno = sp.sno ))
+
+</xmp>
+</code>
+
+
+<h3>	Show the suppliers that are stationed in London, supply P2 and one more part beside P2.  </h3>
+<code>
+<xmp>
+select sname from s
+where city = 'london'
+and sno in (
+select sno 
+from sp 
+where pno  != 'P2')
+and sno in (
+select sno 
+from sp
+where pno  = 'P2')
+
+</xmp>
+</code>
+
+
+<h3>Using EXISTS  to get supplier names for suppliers who supply at least one red part, but does not supply any green part.</h3>
+<code>
+<xmp>
+
+select distinct sname 
+from sp join s on sp.sno = s.sno 
+where exists 
+(select * from p
+where color = 'red'
+and sp.pno = p.pno
+and not exists (
+select * 
+from p
+where color = 'green'))
+
+</xmp>
+</code>
+
+
+ </div> 
+</div>
+</div>
+
+
+
+
+<div id = "section2">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">Numerical SQL Statements</h1>
+  <p class="lead">Using a Database filled with 1-100 to retrieve certain results</p>
+  <hr class="my-4">
+  
+  <!--Code here-->
+<h3>All primes less than 100</h3>
+<code>
+<xmp>
+create view Numbers1To100
+as
+select     D1.D + D10.D * 10 + 1 as number
+from         BASE as D1 CROSS JOIN  BASE as D10
+<br>
+select number 
+
+from Numbers1To100
+where
+number != 1 and
+100 > number 
+and 1 < number 
+and number not in 
+(select F1.number
+from Numbers1To100 as F1  join 
+Numbers1To100 as F2 on  F2.number < F1.number  
+where
+F1.number % F2.number = 0 
+and
+F2.number != 1 
+and
+F1.number != F2.number)
+
+
+</xmp>
+</code>
+
+
+<h3>All even numbers less then 100 by adding prime numbers</h3>
+<code>
+<xmp>
+create view numbersPrime 
+as 
+select number 
+
+from Numbers1To100
+where
+number != 1 and
+100 > number 
+and 1 < number 
+and number not in 
+(select F1.number
+from Numbers1To100 as F1  join 
+Numbers1To100 as F2 on  F2.number < F1.number  
+where
+F1.number % F2.number = 0 
+and
+F2.number != 1 
+and
+F1.number != F2.number)
+<br><br>
+
+select table3.number from numbersPrime
+as table3 
+where 
+table3.number % 2 = 0
+and table3.number not in (
+select (table1.number + table2.number)
+from numbersPrime as table1 join numbersPrime 
+as table2 on
+table1.number != table2.number
+and (table1.number + table2.number) % 2 = 0
+and (table1.number + table2.number) < 101)
+
+
+
+
+
+</xmp>
+</code>
+
+
+<h3>Perfectly balanced integers < 100 (using same view as #1) </h3>
+<code>
+<xmp>
+ select t1.number as P, t2.number as t,
+ Sqrt(t1.number + t2.number),
+ Sqrt(t1.number - t2.number)
+ from Numbers1To100 t1, Numbers1To100 t2
+ where t1.number > t2.number
+ and sqrt (t1.number + t2.number) not like '%.%'
+ and sqrt (t1.number - t2.number) not like '%.%'
+ order by t1.number
+
+
+</xmp>
+</code>
+
+
+<h3>For 10-100, integers with a ten's digit and a unit digit equal to 8</h3>
+<code>
+<xmp>
+create view Numbers1To100
+    as
+    select     D1.D + D10.D * 10 + 1 as number
+from         BASE as D1 CROSS JOIN  BASE as D10
+<br><br>
+select A, A.Tens+A.Units As Sum 
+from	
+(select number,  number%100, 1, 1) as Tens,
+number%10 as units 
+from Numbers1To100
+where number > 9) A
+where A.tens + A.units = 8
+
+
+
+</xmp>
+</code>
+
+
+ </div> 
+</div>
+</div>
+
+
+<!-- links -->
+<footer>
+	<ul>
+			
+			<a href="../index.html">Home</a>
+	</ul>
+</footer>
+</body>
+</html>

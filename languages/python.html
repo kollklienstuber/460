@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Python</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+    <meta name="robots" content="noindex">
+	
+	
+	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+  <link rel="stylesheet" type="text/css" href="lang.css">
+	
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<!-- creating nav bar and the id's to drop to-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+
+  <ul class="nav navbar-nav">
+    <li><a href="#section1">POV-RAY Python</a></li>
+	<li><a href="#section2">Python Scene Creator</a></li>
+	<
+	<li><a href="../index.html">Home</a></li>
+   </ul>
+</nav>
+
+
+<div id = "section1">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">POV-RAY Python</h1>
+  <p class="lead">A previously created POV-Ray object is centered and a "camera" pans throughout lanscrape to create a scence</p>
+  <hr class="my-4">
+<code>
+<xmp>
+import math
+#from labpdf 
+fin = open('C:/base.pov')
+sdl = fin.read() # Read the entire file into a string
+fin.close()
+
+
+
+
+#finding camera
+locationVal = sdl[sdl.find('camera'):] 
+
+
+#traverse through to find < and > of an object 
+initial = locationVal.find('<')
+end = locationVal.find('>')
+
+
+#Location, X, Y, Z points assigned 
+locationVal = locationVal[initial:end+1]
+xLoc = locationVal[1:locationVal.find(',')]
+
+newCoordVal = locationVal[locationVal.find(',') + 1:]
+yLoc = newCoordVal[0:newCoordVal.find(',')]
+
+newCoordVal = newCoordVal[newCoordVal.find(','):]
+zLoc = newCoordVal[1:newCoordVal.find('>')]
+
+
+count = 0
+
+
+#count value effects length
+while count < 111:
+
+#formula for helix shape
+ xLoc = float(xLoc)
+ xLoc = math.cos(xLoc * (3.14/180))
+ yLoc = float(yLoc)
+ yLoc = yLoc + 4
+ zLoc = float(zLoc)
+ zLoc = math.sin(zLoc * (3.14/180))
+ 
+ 
+ MovedCamera = ('camera { location <&d,%d,%d> look_at <0,0,0> } \
+ light_source { <15,15,-20>, color rgb <0.90,0.90,0.85> }'
+ % (yLoc,xLoc,zLoc))
+ newSDL = sdl + MovedCamera
+ num = str(count)
+
+
+ #to write a new file using the string sdl_new
+ outfile = ( num + 'tmp.pov')
+ fout = open( outfile, 'w')
+ fout.write(newSDL)
+ fout.close()
+
+ import os
+ pov_cmd = 'C:/bin/pvengine64.exe /EXIT +I%s +O%s -D -V +A +H600 +W800'
+ cmd = pov_cmd % (outfile, num + 'tmp.png' )
+ os.system(cmd)
+ count = count + 1
+
+
+#Now make the movie
+print 'Encoding movie'
+
+os.system('mencoder.exe mf://*tmp.png -mf type=png:fps=20 -ovc lavc -lavcopts \
+vcodec=msmpeg4:vbitrate=2160000:keyint=5:vhq -o movie.avi ' )
+
+
+</xmp>
+</code>
+
+
+ </div> 
+</div>
+</div>
+
+
+
+
+<!-- section 2-->
+<div id = "section2">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">Python Scene Creator</h1>
+  <p class="lead">Uses the above Python code and for each given frame, saves the frame and labels it accordingly, creates a "movie" using mncoder</p>
+  <hr class="my-4">
+  
+  <!--Code here-->
+<code>
+<xmp>
+#instance variable / instance method / class variable 
+import time
+
+class Box:
+    def __init__(self, info):
+        self.info = 'box{<3, 0.2,0.2> <3.5,0.55, 2.5> pigment{rgb <.1, 8, .2>} scale 5}'
+
+    def addBox(self):
+        return self.info	
+		 
+#list 
+list = [4, 0.5, 8, 10]
+		 
+		 
+fin = open('C:base2.pov')
+sdl = fin.read() # Read the entire file into a string
+	#constructor method
+fin.close()
+list.insert(1, 2)
+#tuples
+tuple = 0, 10, 7, 1
+#dictonary of shapes
+shapes = {'sphere' : 'sphere{<0,0,0> 4.5 \
+pigment{rgb <.2, .2, 8>}} ' , 'box' : 'box {<3, 0.2, 0.2> \
+<3.5, 0.55, 2.5> \
+pigment {rgb <.1, 8, .2>} \
+scale 5}'  }
+curCount = tuple[0]
+UPDSDL = sdl 
+UPDSDL2 = sdl
+
+while curCount < tuple[1]:
+ num = str(curCount)
+ if curCount == list[4]: 
+ 
+ 
+  s = Box('box{<3, 0.2,0.2> <3.5,0.55, 2.5> pigment{rgb <.1, 8, .2>} scale 5}')
+  UPDSDL = sdl + s.addBox()
+  s2 = Box('box{<2, 3.2,0.2> <5.5,0.55, 2.5> pigment{rgb <9, .2, .2>} scale 7}')
+  UPDSDL2 = sdl + s2.addBox()
+  print UPDSDL
+  print UPDSDL2
+   
+   
+ shapes['sphere']
+   
+ #to write a new file using the string sdl_new
+ outfile = ( num + 'tmp.pov')
+ fout = open( outfile, 'w')
+ fout.write(UPDSDL)
+ fout.write(UPDSDL2)
+ fout.close()
+ import os
+ pov_cmd = 'C:bin/pvengine64.exe /EXIT +I%s +O%s -D -V +A +H600 +W800'
+ cmd = pov_cmd % (outfile, num + 'tmp.png' )
+ os.system(cmd)
+ curCount = curCount + tuple[3]
+ 
+#keyword arguments 
+def info_output(head='---ENCODING MOVIE---', middle= '\n', bottom='Finishing ENCODING' ):
+	print(head, middle, bottom)
+
+	info_output()
+
+	
+
+os.system('mencoder.exe mf://*tmp.png -mf type=png:fps=20 -ovc lavc -lavcopts \
+vcodec=msmpeg4:vbitrate=2160000:keyint=5:vhq -o movie.avi ' )
+
+
+</xmp>
+</code>
+
+
+ </div> 
+</div>
+</div>
+
+
+
+<footer>
+	<ul>
+			
+			<a href="../index.html">Home</a>
+	</ul>
+</footer>
+</body>
+</html>

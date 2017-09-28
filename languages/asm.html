@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>ASM</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+    <meta name="robots" content="noindex">
+	
+	
+	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+  <link rel="stylesheet" type="text/css" href="lang.css">
+	
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<!-- creating nav bar and the id's to drop to-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+
+  <ul class="nav navbar-nav">
+  <li><a href="#section1">Rectangle Adjustments</a></li>
+    <li><a href="#section2">Read and Print</a></li>
+	<li><a href="#section3">Hex to Decimal Converter</a></li>
+	
+	<li><a href="../index.html">Home</a></li>
+   </ul>
+</nav>
+
+
+
+<div id = "section1">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">Rectangle Excitement</h1>
+  <p class="lead"> The below code creates two rectangles on the stack and makes
+  use of functions to set width and height, deallocate, get area, and more.
+  </p>
+  <hr class="my-4">
+  
+  <!--Code here-->
+  
+<code>
+<xmp>
+.text
+_start:
+	@allocate space on the stack for two Rectangles
+	SUB	sp, sp, #16
+	MOV	fp, sp		@set frame pointer to last of two objects
+	@rect1 is at fp; rect2 is at fp + 8
+	
+	@construct Rectangle rect1(2, 4)
+	MOV	r0, fp
+	MOV	r1, #2
+	MOV	r2, #4
+	BL	Rectangle_Rectangle
+	
+	@r4 = rect1.getArea()
+	MOV	r0, fp
+	MOV 	r8, lr
+	BL	Rectangle_getArea
+	MOV		r4, r0	
+		
+	
+	@construct Rectangle rect2(3, 3)
+	Rec2:
+	ADD	r0, fp, #8
+	MOV	r1, #3
+	MOV	r2, #3
+	@BL	Rectangle_Rectangle2
+	
+	@rect2.setWidth(5)	
+	BL	Rectangle_setWidth 
+       
+        		
+	@r5 = rect2.getArea()
+	@TODO
+	rect2A:
+	MOV	r0, fp	
+	BL	Rectangle_getArea
+
+
+	@deallocated stack space
+	ADD	sp, sp, #16
+	
+	MOV	r0, #18	@exit
+	SWI	0x123456
+	
+Rectangle_Rectangle:
+	@TODO
+	STR r2, [r0, #0]  	@this->width = 2
+	STR r1, [r0, #4] 	@this->height = 4
+	BL Rectangle_getArea
+Rectangle_Rectangle2:
+	STR r2, [r0, #0]  	@this->width = 2
+	STR r1, [r0, #4] 	@this->height = 4
+		BL END
+Rectangle_getArea: 
+	
+	ADD r7, #1
+
+
+
+	MUL r4, r1, r2 @multiply width and height of rec1
+END:
+	MUL r5, r1, r2 @multiply width and height of rec2
+	BL skip
+
+rec_two_area:
+	MUL r5, r1, r2 @multiply width and height of rec2
+
+skip:
+	CMP r5, #15		@if rec2 is done branch to end
+	BEQ END2 
+	BL Rec2			@else do rec1
+	ADD r7, r7, #1
+        
+	
+Rectangle_setWidth:
+	MOV	r2, #5			@set the width to 5 in rec #2
+	BL Rectangle_Rectangle2		@branch to find area
+END2:
+	SWI 0x123456
+</xmp>
+</code>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+<div id = "section2">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">Read file and print out every other char</h1>
+  <p class="lead"> The below opens a file "code.txt" up to 80 chars and prints out 
+  every other char in the sequence.
+  </p>
+  <hr class="my-4">
+  
+  <!--Code here-->
+  
+<code>
+<xmp>
+.data
+
+fileName:		  .asciz "message.txt"
+.align		@make sure we are word aligned
+
+fileOpenParams: 
+			.word  fileName
+			.word  10			@fileName's length is 10
+			.word  0x4		@text output create/truncate
+			
+
+myString:		  .asciz "Hello everybody"
+.align		@make sure we are word aligned
+
+outputParams:	
+			.word  1			@fileHandle - set to console, need to change
+			.word  myString	@address to write from
+			.word  15			@write 15 chars
+
+.text 
+_start: 
+
+	@Set up parameters for file opening
+	LDR	r1, =fileOpenParams	
+	MOV 	r0, #0x01			@0x01 = open a file
+	SWI 	0x123456
+	
+	@r0 should have file handle (id #)
+	CMP  r0, #-1			@problem opening if handle == -1
+	BEQ	exit				
+	
+	MOV	r7, r0			@r7 = copy of file handle (id #)
+	
+	@Set up parameters for writing
+	LDR	r1, =outputParams	
+	STR	r7, [r1, #0]		@place file handle in first word of params
+
+	MOV 	r0, #0x05			@0x05 = write to file
+	SWI 	0x123456
+
+	@r1 already points to outputParams and first word is file handle to close
+	@nothing else to setup
+	MOV 	r0, #0x02			@0x02 = close a file
+	SWI 	0x123456
+	
+exit:	
+	@Exit program	
+
+
+
+</xmp>
+</code>
+
+
+ </div> 
+</div>
+</div>
+
+
+
+
+<div id = "section3">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   <h1 class="display-3">Conversion</h1>
+  <p class="lead"> The below code takes a value stored in data and converts it to 
+  its decimal equivelent. 
+  </p>
+  <hr class="my-4">
+  
+  <!--Code here-->
+<code>
+<xmp>
+.data
+hexString: .asciz "A31"
+hexString2: .asciz "FF" 
+.align
+
+.text
+_start:
+
+@setup stuff
+LDR r1, = hexString
+LDR r4, = hexString
+LDR r4, [r4]
+LDR r5, = hexString2
+LDR r5, [r5]
+
+/*
+@throw first hex value into funciton
+MOV r0, r4
+BL int asciiHexToDec(char c)
+
+MOV r4, r0
+
+@will have to make use of the second function
+BL otherFunction
+
+@throw second hex value into function
+MOV r0, r5
+BL int asciiHexToDec(char c)
+
+MOV r5, r0
+
+
+@will have to make use of the second function
+BL int hexStringToDec(char* string)
+
+
+@ exit program
+MOV r0, #0x18
+SWI 0x123456
+
+
+
+myFunction
+
+	
+exit:	
+	@Exit program
+	MOV 	r0, #0x18
+	SWI 	0x123456
+
+@----------------------------------
+@int asciiHexToDec(char c)
+ 
+
+myFunction:
+CMP r4, 10
+BLT end1  @branch if less than 10 9-1 will be same as dec
+CMP r4, 16
+BLT ABCDEorF
+CMP r4 26
+BLT 1A1B    
+
+
+
+1A1B:  @decides if it's 1A 1B 1C 1D 1E or 1F
+
+
+
+ABCDEorF:     @decide if its ABCDE or F
+CMP r4, 15
+BLT under15
+CMP r4, 14
+
+
+under15     
+
+
+
+end1:   @branch if less than 10 9-1 will be same as dec    
+
+
+</xmp>
+</code>
+
+
+ </div> 
+</div>
+</div>
+
+
+<!-- links -->
+<footer>
+	<ul>
+			
+			<a href="../index.html">Home</a>
+	</ul>
+</footer>
+</body>
+</html>

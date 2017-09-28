@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>C</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+    <meta name="robots" content="noindex">
+	
+	
+	
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+  <link rel="stylesheet" type="text/css" href="lang.css">
+	
+
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+<!-- creating nav bar and the id's to drop to-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+
+  <ul class="nav navbar-nav">
+    <li><a href="#section1">projects</a></li>
+	<li><a href="../index.html">Home</a></li>
+	
+   </ul>
+</nav>
+
+
+<div id = "section1">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+   
+   
+  <p class="lead"></p>
+  <hr class="my-4">
+  
+  <!--Code here-->
+<code>
+<xmp>
+#include  <stdio.h>
+#include  <string.h>
+#include  <sys/types.h>
+
+#define   MAX  1000
+#define   BUF_SIZE   10
+void  ChildProcess(int array[]);                /* child process prototype  */
+void  ParentProcess(int array[]);               /* parent process prototype */
+int  main()
+{
+	
+	
+    
+ 
+ int array[ MAX ];
+	 int ii,jj;
+	 srand(time(NULL));
+	 for ( ii = 0; ii < MAX; ii++ ) {
+      array[ ii ] = rand() % MAX; 
+   }
+   
+    
+   
+   
+	  pid_t  pid;
+      pid = fork();
+     if (pid == 0) 
+          ChildSmall(array);
+     else 
+          ParentLarge(array);
+}
+
+void  ChildSmall(int array[])
+{
+	int small = array[0];
+                 int temp = 0;
+                
+     for (int i = 1; i <= MAX; i++){
+         temp = array[i];
+                  if (temp <= small){
+                         small = temp;
+                  }
+                  //i++;
+                  }
+                  printf("This is the CHILD:\n");
+                  printf("Least element =  %d", small);
+				  printf("\n");
+                 
+                  for(int i = 0; i < MAX; i++){
+                         array[i] = small;
+                  }
+				  int sum = 0;
+for(int i = 0; i < MAX; i++){
+                        sum = sum + array[i];
+                    } 
+                    printf("Replacing Each element with the child and adding them = %d", sum);
+                    printf("\n");
+				  
+}
+ 
+   
+   
+
+
+void  ParentLarge(int array[])
+{
+     int big = array[0];
+                 int temp = 0;
+                
+     for (int i = 1; i <= MAX; i++){
+         temp = array[i];
+                  if (temp >= big){
+                         big = temp;
+                  }
+                  }
+                  printf("This is the PARENT\n");
+                  printf("Largest element =  %d", big);
+                 printf("\n");
+                  for(int i = 0; i < MAX; i++){
+                         array[i] = big;
+                  }
+				  
+				  int sum = 0;
+for(int i = 0; i < MAX; i++){
+                        sum = sum + array[i];
+                    } 
+                    printf("Replacing Each element with the parent and adding them = %d\n\n", sum);
+                    printf("\n");
+}
+	 
+	 
+
+
+
+
+</xmp>
+</code>
+
+
+ </div> 
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- links -->
+<footer>
+	<ul>
+			
+			<a href="../index.html">Home</a>
+	</ul>
+</footer>
+</body>
+</html>
