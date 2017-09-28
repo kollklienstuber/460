@@ -1,0 +1,37 @@
+body {
+background-color: #81BEF7;
+}
+h1, h2, h3 {
+    color: white;
+}
+p {
+        color: white;
+
+}
+
+
+.page-header{
+	
+}
+
+.col-centered{
+float: none;
+margin: 0 auto;
+}
+
+
+
+.jumbotron{
+    background-color: #2E9AFE;
+    color:white;
+}
+/* Adds borders for tabs */
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+.nav-tabs {
+    margin-bottom: 0;
+}
