@@ -1,0 +1,365 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Koll's Week 1</title>
+
+  <link rel="stylesheet" href="blog.css">
+
+
+<!-- this one is for mobile responsive layout or something like that-->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+<div class = "container-fluid">
+<a href="../../index.html" class="btn btn-primary btl-md" role="button">Back Home </a>
+<h2>Week 1 Blog</h2>
+
+
+<p>For this first week of CS 460 the tasks <a href="http://www.wou.edu/~morses/classes/cs46x/assignments/HW1.html">(found here)</a>included getting an understanding of a few different front end languages and technologies to use. I eneded up in a much different spot then I thought I would be for this week because I initially started with creating the doorstop site shown on a link below. However I switched routes near the end of the project and decided to make my portfolio page something that I will feel beneficial to be linked on my resume to help showcase myself to potential employers by showing them myself, some code samples, and eventually some projects I have done. Both pages however did use HTML CSS and Bootstrap and incorporated the required assignment parameters. <hr><hr>
+
+  <br> <b>Git:</b>First I had to figure out Git. I have tried playing with Git in the past, but I never really understood what I was doing with it and it was nothing consistent so this is the first instance of spending time trying to understand and use it. One of the issues that I did run into this week with Git was I checked out an older commit, and then wanted to make that commit the new master, but I pushed to early or merged something wrong and I ended up fixing one thing, but losing my first blog layout which set me back a little bit of time. 
+  <hr><hr><br> <b>Repos:</b>
+  Next I had to learn how to connect Git to my remote repo, this went pretty smooth but had a few issues along the way working with the Git pages part of my Repo because I think what had happened, was I had an old URL set up someone with my WOU email linked with my current Github account, and the URL was overriding my git pages link causing issues. But once it was found it was a simple fix. 
+  <hr><hr><br> <b>HTML, CSS, and Bootstrap:</b>
+  HTML, CSS and Bootstrap is something I have had experience with in the past so this helped a bit, but it was a while ago so I was still having to do a bit of playing around with everything and guess work at times and know that I need to read into it some more to help my foundational understanding of all three. 
+   <hr><hr><br> <a href="w1index.html" class="btn btn-info btl-md" role="button"> My first site</a>
+   that I created which can be found by going to <a href="w1index.html"> This link or the button to the left</a>. I initially couldn't think of any ideas at all of what to create and I decided to go with the first thing I saw in order to start getting work done. I saw a doorstop so decided to make a page with not super useful information about those while just going through the required aspects and adding them in randomly. For the <b>layout</b> of pages I used single and multi column formatting in multiple places, some examples of this are below,  
+
+
+<pre class="prettyprint" style="text-align: left"> <xmp>
+
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6"><h2><center>Pictures of doorstops</center></h2></div>
+      <div class="col-md-6"><center><h2>Pictures of other things</h2></center></div>
+    </div>
+</div>
+
+<div class = "pic1"
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6"><img src="pictures/stop1.jpg" alt="doorstop" style="width:304px;height:228px;"></div>
+    <div class="col-md-6"><img src="pictures/other1.jpg" alt="doorstop" style="width:304px;height:228px;"></div>
+  </div> 
+  <div class="row">
+    <div class="col-md-6"><img src="pictures/stop2.jpg" alt="doorstop" style="width:304px;height:228px;"></div>
+    <div class="col-md-6"><img src="pictures/other2.jpg" alt="doorstop" style="width:304px;height:228px;"></div>
+  </div> 
+  <div class="row">
+    <div class="col-md-6"><img src="pictures/stop3.jpg" alt="doorstop" style="width:304px;height:228px;"></div>
+    <div class="col-md-6"><img src="pictures/other3.png" alt="doorstop" style="width:304px;height:228px;"></div>
+  </div>  
+</div>
+
+
+  </xmp>
+</pre>
+
+ 
+
+<p> I also used multiple style sheets and html pages for the different layouts that I played with for different pages.
+ <img src="pictures/css.png" class="img-responsive" alt="files"></p>
+<br>
+
+<pre class="prettyprint" style="text-align: left"> <xmp>
+
+ p {font-size: 16px;}
+  
+  .margin {margin-bottom: 45px;}
+  
+  .margin-2 {margin-bottom: 55px;}
+  
+  .bg-1 { 
+      background-color: #1abc9c; /* Green */
+      color: #ffffff;
+  }
+  .bg-2 { 
+      background-color: #474e5d; /* Dark Blue */
+      color: #ffffff;
+  }
+  .bg-3 { 
+      background-color: #2f2f2f; /* White */
+      color: white;
+  }
+  .bg-4 { 
+      background-color: #2f2f2f; /* Black Gray */
+      color: #fff;
+  }
+  
+    .bg-5 { 
+      background-color: green; /* Black Gray */
+      color: #fff;
+  }
+  
+  
+  .container-fluid {
+      padding-top: 70px;
+      padding-bottom: 70px;
+  }
+
+section{
+
+  padding-left: 300px;
+  padding-right: 300px;
+}
+
+
+body {
+  background-color: blue;
+  color: blue;
+  table: white;
+}
+
+.pic1 {
+ text-align: center;
+ padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+}
+
+
+.cooking1{
+  color: blue;
+  text-align: left;
+}
+
+
+.cooking2{
+  
+  color: blue;
+  text-align: left;
+}
+
+
+.contact {
+  text-align: left;
+}
+
+
+  </xmp>
+</pre>
+
+<p> I added in Navigation bars to both my portfolio and first website page and my landing page of the doorstop site holds a table with information about doorstops
+and other basic information and pricing of them as shown below. </p>
+ <img src="pictures/table.png" class="img-responsive" alt="bootstrap table"></p>
+<br>
+
+
+<pre class="prettyprint" style="text-align: left"> <xmp>
+
+
+
+<div class="container">
+  <h2>Overview of common doorstops</h2>       
+  <table class="table" align="left">
+    <thead>
+      <tr>
+        <th>Doorstop Type</th>
+        <th>Cost</th>
+        <th>Info</th>
+    <th>URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Wundermax Decorative Door Stopper</td>
+        <td>12</td>
+        <td>If you need a basic doorstop I guess buy it</td>
+    <td>https://www.amazon.com/Wundermax-Decorative-Stopper-Surfaces-Original/dp/B010ZIANAI/ref=zg_bs_1069196_1?_encoding=UTF8&psc=1&refRID=AEEEDHDSJ4B23NZEH8Z4</td>
+      </tr>
+      <tr>
+        <td>Tenby Easy-Step</td>
+        <td>12</td>
+        <td>Will make you feel like a real biker</td>
+    <td>https://www.amazon.com/Tenby-Easy-Step-Stops-4-Inch-Nickel/dp/B00VAQT8AG/ref=zg_bs_1069196_3?_encoding=UTF8&psc=1&refRID=AEEEDHDSJ4B23NZEH8Z4</td>
+      </tr>
+      <tr>
+        <td>Rok Hardware 3-1/8" Flexi Spring</td>
+        <td>8.50</td>
+        <td>makes that brwrrewrerwerwerwerwerwe sound when you kick it</td>
+    <td>https://www.amazon.com/Rok-Hardware-Spring-Oil-Rubbed-Bronze/dp/B017TT59X2/ref=zg_bs_1069196_12?_encoding=UTF8&psc=1&refRID=AEEEDHDSJ4B23NZEH8Z4</td>
+    </tr>
+    <tr>
+        <td>5pcs Silicone Wall Protectors</td>
+        <td>6</td>
+        <td>Could be used as clay pidgens when you decide to live without doors</td>
+    <td>https://www.amazon.com/Silicone-Protectors-Adhesive-Handle-Stopper/dp/B00SKK2ZS2/ref=zg_bs_1069196_13?_encoding=UTF8&psc=1&refRID=AEEEDHDSJ4B23NZEH8Z4</td>
+    </tr>
+    <tr>
+        <td>Home Premium Door Stopper</td>
+        <td>8.50</td>
+        <td>Could probably use these as hot wheel ramp. Or to stop a door from closing</td>
+    <td>https://www.amazon.com/Home-Premium-Flexible-Surfaces-Scratching/dp/B01NGYKARV/ref=zg_bs_1069196_6?_encoding=UTF8&psc=1&refRID=AEEEDHDSJ4B23NZEH8Z4</td>
+      </tr>
+    
+    
+    </tbody>
+  </table>
+</div>
+
+  </xmp>
+</pre>
+
+
+
+<p> Navigation bars: </p>
+ <img src="pictures/nav2.png" class="img-responsive" alt="bootstrap table"></p>
+ <img src="pictures/nav1.png" class="img-responsive" alt="bootstrap table"></p>
+<br>
+
+
+<pre class="prettyprint" style="text-align: left"> <xmp>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="blog.html">Back to Week 1 Blog</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.html">Home</a></li>
+      <li><a href="recipes.html">Doorstop reciepes</a></li>
+      <li><a href="gallery.html">Gallary</a></li>
+      <li><a href="other.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+ </xmp>
+</pre>
+
+
+
+<p>I added lists in a few parts of both of the sites I made as shown below: </p>
+ <img src="pictures/list1.png" class="img-responsive" alt="bootstrap table"></p>
+ <img src="pictures/list2.png" class="img-responsive" alt="bootstrap table"></p>
+ <img src="pictures/list3.png" class="img-responsive" alt="bootstrap table"></p>
+<br>
+<pre class="prettyprint" style="text-align: left"> <xmp>
+<div style="width: 50%; float:left">
+   <h3>A few Classes I've completed:</h3>
+<ul style="list-style-type:none">
+<li>Programming Languages</li>
+<li>Dynamic Systems Simulations</li>
+<li>Open Source Software development</li>
+<li>Web Application Development</li>
+<li>Analysis of Algorithms</li>
+<li>Data Mining and Warehouse</li>
+<li>Database Management</li>
+<li>Operating Systems</li>
+<li>Computer Architecture & Assembly</li>
+<li>Applied Discrete Mathematics</li>
+<li>Data Structures</li>
+</ul>
+</div>
+
+
+
+
+<div style="width: 50%; float:right">
+   <h3>Some things I can pretend to know what I'm talking about:</h3>
+<ul style="list-style-type:none">
+<li>Full Stack Development with training wheels</li>
+<li>Arduino Microcontrollers and Raspberry Pi</li>
+<li>Microsoft SQL Server</li>
+<li>FTP and SSH clients</li>
+<li>Googling stuff</li>
+<li>Slackline</li>
+<li>Juggling</li>
+<li>Ubuntu</li>
+<li>OOP</li>
+<li>AWS services: IAM, S3, EC2, Lambda, CloudFormation</li>
+</ul>
+</div>
+</div>
+
+ </xmp>
+</pre>
+
+<br><br>
+
+
+<pre class="prettyprint" style="text-align: left"> <xmp>
+
+<div class="container-fluid">
+<div class="row">
+
+<div class = "cooking1">
+<div class="col-md-6"><h3>How to make doorstop soup</h3>
+
+<dl>
+  <dt>What you need:</dt>
+  <dd>    - Handfull of doorstops</dd>
+  <dd>    - Kosher Salt</dd>
+  <dd>    - Cumin and Oregano</dd>
+  <p><b>To make the soup just mix it all in a slow cooker with a handful of oil and eat</b></p>
+</div>
+<div class="col-md-6"> <img src="pictures/misc1.jpg" alt="soup" hspace="20" style="width:304px;height:228px;"></div>
+ 
+</div>
+</div>
+
+
+
+<div class="row">
+
+<div class = "cooking2">
+<div class="col-md-6"><h3>How to make curry</h3>
+
+<dl>
+  <dt>What you need:</dt>
+  <dd>  - Curry</dd>
+  <dd>  - Normal Salt</dd>
+  <p><b>Mix and eat</b></p>
+</div>
+<div class="col-md-6"> <img src="pictures/curry.jpg" alt="soup" hspace="20" style="width:304px;height:228px;"></div>
+ 
+</div>
+</div>
+
+
+<h3>Things I like</h3>
+<ol>
+<li>Juggling</li>
+<li>Spicy Roticery chicken</li>
+<li>other things</li>
+</ol>
+
+</div>
+
+ </xmp>
+</pre>
+
+<!--
+<pre class="prettyprint" style="text-align: left"> <xmp>
+
+
+ </xmp>
+</pre>
+
+-->
+
+<hr><hr>
+
+<a href="../../index.html" class="btn btn-primary btl-md" role="button">Back Home </a>
+</div>
+
+  </body>
+</html>

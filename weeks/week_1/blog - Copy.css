@@ -1,7 +1,16 @@
+
+
 body {
   background-color: blue;
   color: blue;
   table: white;
+}
+
+
+section{
+
+  padding-left: 300px;
+  padding-right: 300px;
 }
 
 .pic1 {
@@ -12,6 +21,11 @@ body {
     padding-left: 80px;
 }
 
+
+#blog_text {
+
+  color: red;
+}
 
 .cooking1{
   color: blue;
