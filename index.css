@@ -1,4 +1,4 @@
-
+ <style>
  		
 
   body {
@@ -8,11 +8,7 @@
 	  
   }
   p {font-size: 16px;}
-  
   .margin {margin-bottom: 45px;}
-  
-  .margin-2 {margin-bottom: 55px;}
-  
   .bg-1 { 
       background-color: #1abc9c; /* Green */
       color: #ffffff;
@@ -22,20 +18,13 @@
       color: #ffffff;
   }
   .bg-3 { 
-      background-color: #2f2f2f; /* White */
-      color: white;
+      background-color: #4A96AD; /* White */
+      color: #555555;
   }
   .bg-4 { 
       background-color: #2f2f2f; /* Black Gray */
       color: #fff;
   }
-  
-    .bg-5 { 
-      background-color: green; /* Black Gray */
-      color: #fff;
-  }
-  
-  
   .container-fluid {
       padding-top: 70px;
       padding-bottom: 70px;
@@ -86,35 +75,6 @@ margin:0 auto;
 	    border-radius: 25px;
 	   
      }
-	 
-	 
-	 	 
-#panel, #flip {
-    padding: 5px;
-    text-align: center;
-    background-color: #e5eecc;
-    border: solid 1px #c3c3c3;
-}
-
-#panel {
-    padding: 50px;
-    display: none;
-}	 
-
-
-
-#container {
-  width: 400px;
-  height: 400px;
-  position: relative;
-  background: yellow;
-}
-#animate {
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  background-color: red;
-}
-	 
 
   
+  </style>
