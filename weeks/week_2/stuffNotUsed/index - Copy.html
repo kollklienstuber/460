@@ -1,0 +1,99 @@
+<html>
+<head>
+
+
+<!--bootstrap -->   
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<!--jqueary (CDN)-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- google api of the pi chart -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!--Angular -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<script type="text/javascript">
+// Load google charts
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+
+
+
+// Draw the chart and set the chart values
+
+
+
+    var chartObj = ([
+  ['Task', 'Hours per Day'], //ARRAY KEY 0   
+  
+  ['default10', 1],
+  ['default10', 1]
+      
+]);
+
+var task = document.getElementByName("task");
+var hoursPerDay = document.getElementByName("hoursPerDay");
+
+
+chartObj[1][0] = "testing"; 
+chartObj[1][1] = 5; 
+
+
+
+
+function drawChart() {
+
+// Pass the chartObj to the function
+var data = google.visualization.arrayToDataTable(this.chartObj);
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Time Spent', 'width':700, 'height':500};
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+
+
+
+
+//hide and show the pie chart
+$(document).ready(function(){
+    $("#hide").click(function(){
+        $("#piechart").hide();
+    });
+    $("#show").click(function(){
+        $("#piechart").show();
+    });
+});
+
+
+</script>
+</head>
+
+<body>
+
+<form>
+    Task: <br>
+    <input type="text" name="task"> <br>
+    Hours done per day: <br>
+    <input type="text" name="hoursPerDay">
+</form>
+
+<!--buttons to hide and show chart -->    
+<div class ="container-fluid">   
+<button id = "hide">hide the pie chart</button>
+<button id = "show">show the pie chart</button>
+</div>
+
+<div id="piechart"></div>
+
+
+
+
+
+</body>
+<html>
