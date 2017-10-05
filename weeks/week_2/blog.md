@@ -75,6 +75,7 @@ $(document).ready(function(){
 
 
 The next thing that I wanted to do was use jQuery to add new and user dependend elements to the page. So I looked around online a bit for some tutorials on how to make jQuery add items and was able to eventually alter some code to make my list creator work.
+sdfasdf
 
 
 ![alt text](pics/list.PNG "JS prompt")
