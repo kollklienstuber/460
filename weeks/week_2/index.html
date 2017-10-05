@@ -1,43 +1,39 @@
-<!DOCTYPE html>
+
 <html>
 <head>
-	
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 
+<!--This is for bootstrap -->	
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<script type="text/javascript">
-// Load google charts
-google.charts.load('current', {'packages':['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+<!--This is for jqueary to work (CDN)-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-// Draw the chart and set the chart values
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-  ['Task', 'Hours per Day'],
-  ['Work', 18],
-  ['Friends', 2],
-  ['Eat', 2],
-  ['TV', 3],
-  ['Gym', 2],
-  ['Sleep', 7]
-]);
 
-  // Optional; add a title and set the width and height of the chart
-  var options = {'title':'Time Spent', 'width':400, 'height':300};
-
-  // Display the chart inside the <div> element with id="piechart"
-  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-  chart.draw(data, options);
-}
-</script>
 </head>
 
 <body>
+<script>
+
+var spotifyApi = new SpotifyWebApi();
+spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE', function(err, data) {
+  if (err) console.error(err);
+  else console.log('Artist albums', data);
+});
+</script>
+
+<div class ="container-fluid">
+
+
+<h1>electric cost</h1>
+
+<ul id="costs">
+  
+</ul>
 
 
 
-<div id="piechart"></div>
+</container>
 
 </body>
 <html>
