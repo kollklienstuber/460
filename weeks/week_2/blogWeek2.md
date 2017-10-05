@@ -1,19 +1,7 @@
-<<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
 
-
-
-
-
-
-
-
-<h1>test</h1>
+test
+========
+test
 
 
 # Overview
@@ -43,14 +31,4 @@ function askName(){
 ![alt text](pics/prompt.PNG "JS prompt")
 
 
-
-
-
-
-
-
-
-	
-</body>
-</html>
 
