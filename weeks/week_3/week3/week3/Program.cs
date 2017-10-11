@@ -20,6 +20,7 @@ namespace week3
     {
         private Node top;
         private LinkedStack() {
+            int test;
              
         }
 
