@@ -1,9 +1,8 @@
-/** C Sharp Interface defining a Stack.
+﻿/** C Sharp Interface defining a Stack.
         ----------------------------
         -- -- Koll Klienstuber -- --
         ----------------------------
  */
-
 
 using System;
 
@@ -16,10 +15,10 @@ namespace Calculator
 	// Pushing an object that is not an item should result in an error.
 	 // This operation returns a reference (pointer or link, but not a copy)
 	 // to the item pushed so that an anonymous object can be pushed and then used.
-	  <param> newItem The object to push onto the top of the stack.Should not be null</param>
+	 // <param> newItem The object to push onto the top of the stack.Should not be null</param>
 	 // @return A reference to the object that was pushed, or null if newItem == null
 	 //
-    public interface IStackADT
+    public interface IADTStack
     {
         /*
 
