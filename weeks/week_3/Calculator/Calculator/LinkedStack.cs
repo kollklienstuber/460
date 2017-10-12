@@ -1,40 +1,17 @@
-﻿namespace Calculator
+﻿
+/* 
+     ----------------------------
+     -- -- Koll Klienstuber -- --
+     ----------------------------
+ */
+namespace Homework3
 {
-
-    class LinkedStack : IStackADT
+   
+    class LinkedStack : ICalculatorStackAdt
     {
         private Node topNode;
-        
-        public LinkedStack()
-        {
-            topNode = null;
-        }
 
-        public object Peek()
-        {
-            return IsEmpty() ? null : TopNode.Data;
-        }
-
-
-        public bool IsEmpty()
-        {
-            return this.TopNode == null;
-        }
-
-        public Node TopNode
-        {
-            get { return topNode; }
-            set { topNode = value; }
-        }
-
-
-        public void Clear()
-        {
-            this.TopNode = null;
-        }
-
-
-
+        //push and pop 
         public object Push(object newItem)
         {
             if (newItem == null)
@@ -45,7 +22,6 @@
             TopNode = newNode;
             return newItem;
         }
-
 
         public object Pop()
         {
@@ -59,6 +35,37 @@
         }
 
 
-    }
+        public LinkedStack()
+        {
+            topNode = null;
+        }
 
+        //top node
+        public Node TopNode
+        {
+            get { return topNode; }
+            set { topNode = value; }
+        }
+
+        //condiational is empty operator for peeking
+        public object Peek()
+        {
+            return IsEmpty() ? null : TopNode.Data;
+        }
+
+        //clears top node
+        public void Clear()
+        {
+            this.TopNode = null;
+        }
+
+        //returns top node
+        public bool IsEmpty()
+        {
+            return this.TopNode == null;
+        }
+
+
+
+    }
 }
