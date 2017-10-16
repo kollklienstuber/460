@@ -119,7 +119,7 @@ namespace Homework3
                 {
                     initial = (a / b);
                     if (Double.IsNegativeInfinity(initial) || Double.IsPositiveInfinity(initial))
-                        throw new ArgumentException("You're trying to divide by zero and we can't really have that happen");
+                        throw new ArgumentException("Youre trying to divide by zero and we can't really have that happen");
                 }
                 catch (ArithmeticException ex)
                 {
