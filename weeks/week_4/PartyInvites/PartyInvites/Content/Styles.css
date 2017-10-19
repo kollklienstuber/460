@@ -1,7 +1,4 @@
-﻿body {
-
-.field-validation-error
-{
+﻿.field-validation-error {
     color: #f00;
 }
 
@@ -21,6 +18,4 @@
 
 .validation-summary-valid {
     display: none;
-}
-
 }

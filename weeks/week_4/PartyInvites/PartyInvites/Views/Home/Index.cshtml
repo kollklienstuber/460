@@ -24,12 +24,20 @@
 </head>
 <body>
     <div class="text-center">
-        @ViewBag.Greeting Koll. You're making stuff work!
-        <br />
-        RSVP Things
-        <div class="btn btn-success">
-        @Html.ActionLink("RSVP Now", "RsvpForm")
+        <h3>@ViewBag.Greeting! Click on the buttons below to be taken to the corresponding pages!</h3> 
 
-        </div>
+
+        <ul>
+            <div class="btn btn-success">
+                @Html.ActionLink("RSVP Form", "RsvpForm")
+            </div>
+            <div class="btn btn-success">
+                @Html.ActionLink("Thing 2", "RsvpForm")
+            </div>
+            <div class="btn btn-success">
+                @Html.ActionLink("Thing 3", "RsvpForm")
+            </div>
+        </ul>
+            </div>
 </body>
 </html>
