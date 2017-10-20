@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "TempForm";
+}
+
+<h2>FormExample</h2>
+
+<form method="post">
+    <label for="age">Your age</label>
+    <input type="number" name="age" value="" />
+    <label for="name">Your name</label>
+    <input type="text" name="name" value="" />
+    <input type="submit" name="submit" value="Submit" />
+</form>
+
+@if (ViewBag.name != null)
+{
+    <p>Thank you @ViewBag.name</p>
+}
