@@ -123,6 +123,7 @@
     <Content Include="Views\Home\Thanks.cshtml" />
     <Content Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\Home\TempForm.cshtml" />
+    <Content Include="Views\Home\Macros.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -27,17 +27,17 @@
         <h3>@ViewBag.Greeting! Click on the buttons below to be taken to the corresponding pages!</h3> 
 
 
-        <ul>
-            <div class="btn btn-success">
-                @Html.ActionLink("RSVP Form", "RsvpForm")
-            </div>
-            <div class="btn btn-success">
-                @Html.ActionLink("Temperature Converter", "TempForm", "Home")
-            </div>
-            <div class="btn btn-success">
-                @Html.ActionLink("Thing 3", "RsvpForm")
-            </div>
+        <ul>                      
+            <li class="btn btn-success">
+                @Html.ActionLink("Age information", "TempForm", "Home") </li>
+          
+            <li class="btn btn-success">
+                @Html.ActionLink("Macros", "Macros", "Home")
+            </li>
+            <li  class="btn btn-success">  
+            @Html.ActionLink("RSVP Form", "RsvpForm", "Home")
+            </li>
         </ul>
-            </div>
+        </div>
 </body>
 </html>

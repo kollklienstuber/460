@@ -33,9 +33,9 @@
                 <div class="form-group">
                     <label>Will you be in attendance?</label>
                     @Html.DropDownListFor(x => x.WillAttend, new[] {
-                     new SelectListItem() {Text = "Yes, I'll be there",
+                     new SelectListItem() {Text = "Yes, I will be in attendance",
                      Value = bool.TrueString},
-                     new SelectListItem() {Text = "No, I can't come",
+                     new SelectListItem() {Text = "No, I cant make it",
                      Value = bool.FalseString}
                      }, "Choose an option", new { @class = "form-control" })
                 </div>
