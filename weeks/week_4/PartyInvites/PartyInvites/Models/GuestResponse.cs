@@ -14,6 +14,8 @@ namespace PartyInvites.Models
         public bool? WillAttend { get; set; }
         [Required(ErrorMessage = "Please enter your phone number")]
         public string Phone { get; set; }
+        [Required(ErrorMessage = "Please enter guests you will bring")]
+        public int Guests { get; set; }
         [Required(ErrorMessage = "Please enter your e-mail address")]
         [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Please enter a valid email address")]
         public string Email { get; set; }

@@ -22,7 +22,13 @@
    
     <div class="text-center">
         
-        <h1>Thank you, @Model.Name!</h1>
+        <h1>Thank you, @Model.Name! See you and youre @Model.Guests guests at the event.</h1>
+        <br />
+        <h3>Here is the information that we have on file for you, If anything is incorrect click here to fix the issues:</h3>\
+        <h4>Phone number on file: @Model.Phone <br />
+            E-mail on file: @Model.Email <br />
+            Guests you will be brining: @Model.Guests <br />
+            Name on File @Model.Name <br /></h4>
         <div class="lead">
 
             @if (Model.WillAttend == true)
