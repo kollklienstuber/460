@@ -36,6 +36,8 @@ For part one I decided to make a simple page that asks for your age and then ret
 Some of the code for part one can be found here. The controller is shown first and then the model. My controller used the data from the form in my view and this was also something I found very useful once I was able to understand what was going on and figure out that visual studio was able to pull the variables from my view while the code was in the controller. 
 
 ![wireframe](pics/age1.PNG "age controller")
+
+
 ##code for view of part one
 My view for part one was a html body that had a form inside of it.
 
@@ -47,7 +49,11 @@ My view for part one was a html body that had a form inside of it.
 For part two I decided to take in user input that included a users age, weight and gender and returned information about the amount of macronutrients they should be consuming on a daily basis based off of very breif reasearch. 
 
 ##part two controller and view
+
+
 ![wireframe](pics/macro1.PNG "macro Controller Post")
+
+
 For the view I did the same thing as part one except I used a few different form types. 
 
 ![wireframe](pics/macro2.PNG "some math")
@@ -63,6 +69,7 @@ For part three the data was stored in a model called guest response that used ge
 ![wireframe](pics/getset.PNG "model part 3")
 
 The view for part three was also adapted from the books tutorial and used a lot of html helper methods and this was something I found difficult at first because it had me googling a lot to figure out what each different helper method was doing. However it did end up giving me a better idea of the different ways that lambda functions can be envoked and used. 
+
 
 ![wireframe](pics/3a.PNG "model part 3")
 

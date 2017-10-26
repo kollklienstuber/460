@@ -17,6 +17,7 @@ To start learning I began by getting an overview of the language and watching [t
 
 ## Some pictures of the calculator up and running
 On start up of the program this is what we see
+
 ![wireframe](pics/one.PNG "main menu")
 
 We are able to enter in a variety of post fix expressions and get the expected result as well as shown below!
@@ -27,6 +28,8 @@ We are able to enter in a variety of post fix expressions and get the expected r
 
 
 We are also able to get back information if the user enters in data that doesn't make sense for a post fix calculator and in addition errors back out to the console for things like divide by 0 errors.
+
+
 ![wireframe](pics/Null.PNG "null error")
 
 ![wireframe](pics/errors.PNG "some errors")
@@ -40,11 +43,17 @@ A peice of Node.cs
 
 
 Push and pull 
+
+
 ![wireframe](pics/pushPoo.PNG "push/pull")
 
 Stack
+
+
 ![wireframe](pics/stackadt.PNG "push/pull")
 
+
+main
 
 ![wireframe](pics/calc1.PNG "push/pull")
 
