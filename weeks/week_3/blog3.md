@@ -38,6 +38,7 @@ We are also able to get back information if the user enters in data that doesn't
 Below is some of the code that I used for this assignment. The complete code can again be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_3) 
 
 A peice of Node.cs
+
 ![wireframe](pics/node.PNG "node")
 
 
