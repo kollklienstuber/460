@@ -29,6 +29,8 @@ My index page had a simple HTML layout and three HTML action links. The Action l
 For part one I decided to make a simple page that asks for your age and then returns information about the amount of time left you have to live based simply on age and the average american lifespan. A visuilization of this is below along with the page that gets returned after the user enters in the input. One thing I could have spent more time on is making the output more visually appealing. 
 
 ![wireframe](pics/agePage.PNG "main menu")
+![wireframe](pics/agePage.PNG "main menu")
+![wireframe](pics/agePage.PNG "main menu")
 
 ![wireframe](pics/agePage2.PNG "return post")
 
@@ -55,7 +57,13 @@ Part two controller and view
 
 For the view I did the same thing as part one except I used a few different form types. 
 
-![wireframe](pics/macro2.PNG "some math")
+![wireframe](pics/macro2.PNG "macros")
+
+
+![wireframe](pics/macros1.PNG "macros")
+
+![wireframe](pics/macros2.PNG "macros")
+
 
 ## Part three
 
@@ -70,7 +78,15 @@ For part three the data was stored in a model called guest response that used ge
 The view for part three was also adapted from the books tutorial and used a lot of html helper methods and this was something I found difficult at first because it had me Googling a lot to figure out what each different helper method was doing. However it did end up giving me a better idea of the different ways that lambda functions can be envoked and used. 
 
 
+
+
 ![wireframe](pics/3a.PNG "model part 3")
+
+
+![wireframe](pics/rsvp1.PNG "model part 3")
+
+
+![wireframe](pics/rsvp2.PNG "model part 3")
 
 
 Overall this assignment at first had me confused about working with MVC but now I feel much more comfertable working with it as well as visual studio. I think that for the next assignment I will spend more time on the asthetics of it but going into week five I feel semi confident that it should go smoothly to add in a database. 
