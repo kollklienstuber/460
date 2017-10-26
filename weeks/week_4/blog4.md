@@ -29,9 +29,10 @@ My index page had a simple HTML layout and three HTML action links. The Action l
 For part one I decided to make a simple page that asks for your age and then returns information about the amount of time left you have to live based simply on age and the average american lifespan. A visuilization of this is below along with the page that gets returned after the user enters in the input. One thing I could have spent more time on is making the output more visually appealing. 
 
 ![wireframe](pics/agePage.PNG "main menu")
-![wireframe](pics/agePage.PNG "main menu")
-![wireframe](pics/agePage.PNG "main menu")
 
+
+![wireframe](pics/agePage2.PNG "return post")
+![wireframe](pics/agePage2.PNG "return post")
 ![wireframe](pics/agePage2.PNG "return post")
 
 ## code for part one 
