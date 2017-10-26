@@ -54,6 +54,7 @@ namespace PartyInvites.Controllers
             decimal lifeLeft = curLifeSpan - age;
             decimal b = Decimal.Parse(percentLeft.ToString("#.00"));
 
+
             return Content($"{name} if you are currently {age} years old and plan to" +
                 $" live to be the age of an average" +
                 $"american (79 years old) then you have {lifeLeft} years left to live! To put it" +
@@ -87,14 +88,12 @@ namespace PartyInvites.Controllers
                 fat = weight * 0.35;
                 ViewBag.caloriesToEat = ($"{name}Based on your information you should eat {protien} grams of protein, {fat} grams of fat, and fill the rest with carbs or eat kit kats. I'm not a doctor");
             }
-
             else
             protien = weight / 1.4;
             protien = Math.Round(protien, 2);
 
             fat = weight * 0.4;
             ViewBag.caloriesToEat = ($"{name} Based on your information you should eat {protien} grams of protein, {fat} grams of fat, and fill the rest with carbs or eat kit kats. I'm not a doctor");
-
 
             return View();
         }

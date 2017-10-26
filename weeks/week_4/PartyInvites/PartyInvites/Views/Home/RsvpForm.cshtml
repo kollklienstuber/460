@@ -12,8 +12,8 @@
     <title>RsvpForm</title>
 </head>
 <body>
-    <div class="panel panel-success">
-        <div class="panel-heading text-center"><h4>RSVP</h4></div>
+    <div class="panel">
+        <div class="panel-heading text-center" style="color:red;"><h4>RSVP for to send to server</h4></div>
         <div class="panel-body">
             @using (Html.BeginForm())
             {
@@ -37,10 +37,10 @@
                      Value = bool.TrueString},
                      new SelectListItem() {Text = "No, I cant make it",
                      Value = bool.FalseString}
-                     }, "Choose an option", new { @class = "form-control" })
+                     }, "Pick an option", new { @class = "form-control" })
                 </div>
                 <div class="text-center">
-                    <input class="btn btn-success" type="submit" value="Submit RSVP" />
+                    <input class="btn btn-success" type="submit" value="Submit your RSVP form to the server" />
                 </div>
             }
         </div>

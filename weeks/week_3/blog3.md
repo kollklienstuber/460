@@ -31,4 +31,24 @@ We are also able to get back information if the user enters in data that doesn't
 
 ![wireframe](pics/errors.PNG "some errors")
 
+##Some Code 
+Below is some of the code that I used for this assignment. The complete code can again be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_3) 
+
+A peice of Node.cs
+![wireframe](pics/node.PNG "node")
+
+
+
+Push and pull 
+![wireframe](pics/pushPoo.PNG "push/pull")
+
+Stack
+![wireframe](pics/stackadt.PNG "push/pull")
+
+
+![wireframe](pics/calc1.PNG "push/pull")
+
+
+![wireframe](pics/calc2.PNG "push/pull")
+
 
