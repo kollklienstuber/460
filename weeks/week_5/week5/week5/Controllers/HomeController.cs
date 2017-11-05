@@ -11,7 +11,7 @@ namespace week5.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            return View("FormView");
         }
 
         // GET: Home/Details/5
