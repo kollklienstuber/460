@@ -17,16 +17,16 @@ namespace week5b.Models
         public int ODL { get; set; }
 
         [Display(Name = "Name:"), Required]
-        public string Name { get; set; }
+        public string PName { get; set; }
 
         [Display(Name = "Address:"), Required]
-        public string Address { get; set; }
+        public string PAddress { get; set; }
 
         [Display(Name = "City:"), Required]
         public string City { get; set; }
 
         [Display(Name = "State:"), Required]
-        public string State { get; set; }
+        public string PState { get; set; }
 
         [Display(Name = "Zip Code:"), Required]
         public int Zip { get; set; }
@@ -38,11 +38,11 @@ namespace week5b.Models
         public DateTime DOB { get; set; }
 
         [Display(Name = "Date:"), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}"), Required]
-        public DateTime Date { get; set; }
+        public DateTime TodaysDate { get; set; }
 
         public override string ToString()
         {
-            return $"{base.ToString()}; {ID} {ODL} {Name} {Address} {City} {State} {Zip} {County} {Date} {DOB} ";
+            return $"{base.ToString()}; {ID} {ODL} {PName} {PAddress} {City} {PState} {Zip} {County} {TodaysDate} {DOB} ";
         }
     }
 }
