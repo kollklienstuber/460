@@ -12,7 +12,7 @@ CREATE TABLE dbo.Requests
 	PState				NVARCHAR(128)		NULL,
 	TodaysDate			DATE				NOT NULL
 
-	CONSTRAINT [PK_dbo.Requests] PRIMARY KEY CLUSTERED (RequestID ASC)
+	CONSTRAINT [PK_dbo.Requests] PRIMARY KEY CLUSTERED (ID ASC)
 );
 
 INSERT INTO dbo.Requests (ODL, DOB, PName, PAddress, Zip, 
