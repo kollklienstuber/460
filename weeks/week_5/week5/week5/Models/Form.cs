@@ -51,7 +51,7 @@ namespace week5.Models
 
         public override string ToString()
         {
-            return $"{base.ToString()}; VNo = {ODL} {Name} {Address} {City} {State} {Zip} {County} {Date} ";
+            return $"{base.ToString()}; {ODL} {Name} {Address} {City} {State} {Zip} {County} {Date} ";
         }
     }
 }
