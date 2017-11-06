@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.ComponentModel.DataAnnotations;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
-namespace week5.Models
+
+namespace week5b.Models
 {
-    public class Form
+    public class Request
     {
 
-
-
-        /*
-		 ODL 
-		 Name
-		 Address
-		 City
-         State
-         Zip
-		 County
-		 Date
-         DOB
-         */
-
+        [Display(Name = "Customer Number"), Required]
         public int ID { get; set; }
 
         [Display(Name = "ODL"), Required]
@@ -38,13 +26,13 @@ namespace week5.Models
         public string City { get; set; }
 
         [Display(Name = "State:"), Required]
-        public string State {get; set;}
+        public string State { get; set; }
 
         [Display(Name = "Zip Code:"), Required]
-        public int Zip {get; set;}
+        public int Zip { get; set; }
 
         [Display(Name = "County:"), Required]
-        public string County {get; set;}
+        public string County { get; set; }
 
         [Display(Name = "Date of birth:"), DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}"), Required]
         public DateTime DOB { get; set; }
@@ -54,7 +42,7 @@ namespace week5.Models
 
         public override string ToString()
         {
-            return $"{base.ToString()}; {ODL} {Name} {Address} {City} {State} {Zip} {County} {Date} {DOB} ";
+            return $"{base.ToString()}; {ID} {ODL} {Name} {Address} {City} {State} {Zip} {County} {Date} {DOB} ";
         }
     }
 }
