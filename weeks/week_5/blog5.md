@@ -6,91 +6,70 @@
 
 
 ## The assignment
-The assignment for this week can be found [here](http://www.wou.edu/~morses/classes/cs46x/assignments/HW5.html). The assignment for this week has me starting to learn the database functionality of ASP.NET MVC 5. I had no experience prior to this week of the subject and I found it confusing at first and some of the biggest issues I had surrouneded getting the right settings and my MVC system set up and linked together correctly. 
+The assignment for this week can be found [here](http://www.wou.edu/~morses/classes/cs46x/assignments/HW5.html). The assignment for this week has me starting to learn the database functionality of ASP.NET MVC 5. I had no experience prior to this week of the subject and I found it confusing at first and some of the biggest issues I had surrouneded getting the right settings and my MVC system set up and linked together correctly. In addition I had issues with things that still leave me a bit confused in regards to compiling my site. Specfically, I ran into problems where I would run my project and would get different errors depending on what page I ran my project from which made little sense and gave me issues in figuring out what is acctually wrong. 
 
 ## Link to code on Github
-The full code for this assignment can be found [here](LINKHERE) and some sample images of the code are also shown below.  
+The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_5) and some sample images of the code are also shown below.  
 
 ## Some Issues and initial steps
-I started this assignemnt in a way that eventually had me back track and start over. This was because I went and found a tutroial online that had me create a database through visual studios that did end up working fine, but it didn't make use of an up and down.sql script and also had some GUI implimentation of parts of the code. Once I re started I
-
-## Index page code and visuals.
-For my index page and all the others I thought that it would be better for me to not use any sort of layout at all and while I think it helped inititally, it made some of the other pages a bit less visually appealing. The index page is shown below.
-
-![wireframe](pics/index.PNG "index img")
+I started this assignemnt in a way that eventually had me back track and start over multiple times due to having trouble connecting to the database, linking code together and having a not super solid understanding of what I was doing. However I think I eventually got a decent grasp over the end result of the project. For my vairables I used the required and naming conventions to help with there creations as shown below. I started with my model which looked like, 
 
 
-My index page had a simple HTML layout and three HTML action links. The Action links parameters were ("button label", "controllerName","FolderOfController") This was something that confused me at first because I had trouble understanding how the action links and other html helper methods worked and had trouble at times finding relevant information online. Below is some code of my Index page.
-
-![wireframe](pics/index1.PNG "index code")
+![wireframe](pics/index.PNG "Model.PNG")
 
 
-## Part one:
-For part one I decided to make a simple page that asks for your age and then returns information about the amount of time left you have to live based simply on age and the average american lifespan. A visuilization of this is below along with the page that gets returned after the user enters in the input. One thing I could have spent more time on is making the output more visually appealing. 
+## Controllers
+I used two controllers, One that was just a plain controller that linked to my index page, 
 
-![wireframe](pics/agePage.PNG "main menu")
-
-
-![wireframe](pics/agePage2.PNG "return post")
-![wireframe](pics/agePage2.PNG "return post")
-![wireframe](pics/agePage2.PNG "return post")
-
-## code for part one 
-Some of the code for part one can be found here. The controller is shown first and then the model. My controller used the data from the form in my view and this was also something I found very useful once I was able to understand what was going on and figure out that visual studio was able to pull and correctly store and use the form variables automatically.  
-
-![wireframe](pics/age1.PNG "age controller")
+![wireframe](pics/Cont1.PNG "Controller 1 img")
 
 
-My view for part one was a html body that had a form inside of it.
+and another one, "RequestController" that handled serving the content of the create and view pages. a small peice of it is shown below.
 
-
-![wireframe](pics/age2.PNG "age view")
-
-
-## Part two 
-For part two I decided to take in user input that included a users age, weight and gender and returned information about the amount of macronutrients they should be consuming on a daily basis based off of very brief reasearch that is not that accurate. 
-
-Part two controller and view
-
-
-![wireframe](pics/macro1.PNG "macro Controller Post")
-
-
-For the view I did the same thing as part one except I used a few different form types. 
-
-![wireframe](pics/macro2.PNG "macros")
-
-
-![wireframe](pics/macros1.PNG "macros")
-
-![wireframe](pics/macros2.PNG "macros")
-
-
-## Part three
-
-For part three I ended up doing first and last in regards to how I started this assignment. I was unsure exactly how to work with the post and get methods and so went to the book and followed along with the tutorial and it helped a lot to get a better understanding of what I needed to do. I ended up using the RSVP calculator that the book went through but modified it a bit as to make it not a complete copy of the books example. It did also use a model which is something I ended up adding into my HW 4 as to keep the ability to follow along. This RSVP form used model binding and also validation of the input the user sent to the server. 
-
-## Part three MVC images. 
-For part three the data was stored in a model called guest response that used getters and setters to collect the data. 
-
-
-![wireframe](pics/getset.PNG "model part 3")
-
-The view for part three was also adapted from the books tutorial and used a lot of html helper methods and this was something I found difficult at first because it had me Googling a lot to figure out what each different helper method was doing. However it did end up giving me a better idea of the different ways that lambda functions can be envoked and used. 
+![wireframe](pics/Cont2.PNG "Controller 2 img")
 
 
 
 
-![wireframe](pics/3a.PNG "model part 3")
+
+## Database Up.sql and Down.sql
+For the creation of the local database I used a simple down.sql that just simply dropped the table, and for the up.sql I followed the bitbucket class code examples but added in my own vairables rather then the "user" variables found on that page as shown below. When I wasn't getting errors the table was able to successfully build after I had put in the proper connectiong string to my web.config file
+
+ '''<add name="FormContext" connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\kklie_000\Desktop\460_git\weeks\week_5\week5b\week5b\App_Data\Database1.mdf;Integrated Security=True" providerName="System.Data.SqlClient"/>'''
 
 
-![wireframe](pics/rsvp1.PNG "model part 3")
+I also had to make sure that my connection to the database wasn't set to master which was something that slowed me down as well but I was able to fix by changing it to my local file systems routing to the proper database. 
+
+up.sql
 
 
-![wireframe](pics/rsvp2.PNG "model part 3")
+![wireframe](pics/DB1.PNG "Database 1")
+
+down.sql
 
 
-Overall this assignment at first had me confused about working with MVC but now I feel much more comfertable working with it as well as visual studio. I think that for the next assignment I will spend more time on the asthetics of it but going into week five I feel semi confident that it should go smoothly to add in a database. 
+![wireframe](pics/DB2.PNG "Database 2")
+
+
+
+## Views 
+My landing page view from my default controller was just a simple html action link to the create and view database results page as show below, 
+
+![wireframe](pics/view1.PNG "view1")
+
+For the views that handeled showing and updating the database they used multiple html action links and model binding so I was able to access the model with ease. Some code samples of these are shown below,
+
+![wireframe](pics/view2.PNG "age view")
+
+
+![wireframe](pics/view3.PNG "age view")
+
+My DAL file was also added in early on and it seemed to be one of the parts that connected semi smoothly and looked like the below.
+
+
+![wireframe](pics/DAL.PNG "DAL")
+
+Overall this assignment at first had me confused about working with Databases because of all the small parts of it and all the interconnectivity. I ran into a large amount of issues that were solved by usually finding a single line of code or adding in a library. I do feel more comfertable But I know I need to go back and make sure I have a bit more confidence with working with a database with MVC before moving on. 
 
 
 
