@@ -21,5 +21,5 @@ INSERT INTO dbo.Requests (ODL, DOB, PName, PAddress, Zip,
 	('444555', '1996-12-14', 'Koll Klienstuber', '302 south monmouth ave', '97138', 'Polk', 'Monmouth', 'Oregon', '2017-05-11'),
 	('444555', '1996-12-14', 'Koll Klienstuber', '302 south monmouth ave', '97138', 'Polk', 'Monmouth', 'Oregon', '2017-05-11'),
 	('444555', '1996-12-14', 'Koll Klienstuber', '302 south monmouth ave', '97138', 'Polk', 'Monmouth', 'Oregon', '2017-05-11'),
-	('444555', '1996-12-14', 'Koll Klienstuber', '302 south monmouth ave', '97138', 'Polk', 'Monmouth', 'Oregon', '2017-05-11'),
+	('444555', '1996-12-14', 'Koll Klienstuber', '302 south monmouth ave', '97138', 'Polk', 'Monmouth', 'Oregon', '2017-05-11')
 GO
