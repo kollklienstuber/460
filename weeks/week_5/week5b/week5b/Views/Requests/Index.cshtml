@@ -47,17 +47,14 @@
                 @Html.DisplayNameFor(model => model.ID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PName)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ODL)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DOB)
+                @Html.DisplayFor(modelItem => item.PName)
             </td>
-            <th>
+            <td>
                 @Html.DisplayFor(modelItem => item.PAddress)
-            </th>
+            </td>
             <th>
                 @Html.DisplayFor(modelItem => item.City)
             </th>
@@ -68,10 +65,13 @@
                 @Html.DisplayFor(modelItem => item.Zip)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => item.County)
+                @Html.DisplayFor(modelItem => item.DOB)
             </th>
             <th>
                 @Html.DisplayFor(modelItem => item.TodaysDate)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.County)
             </th>
         </tr>
     }
