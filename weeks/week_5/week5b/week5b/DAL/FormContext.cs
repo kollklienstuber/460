@@ -12,7 +12,9 @@ namespace week5b.DAL
     public class FormContext : DbContext
     {
         public FormContext() : base("name=FormContext")
-        { }
+        {
+
+        }
 
         public virtual DbSet<Request> Requests { get; set; }
 
