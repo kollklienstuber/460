@@ -6,13 +6,13 @@
 
 
 ## The assignment
-The assignment for this week can be found [here](http://www.wou.edu/~morses/classes/cs46x/assignments/HW5.html). The assignment for this week has me starting to learn the database functionality of ASP.NET MVC 5. I had no experience prior to this week of the subject and I found it confusing at first and some of the biggest issues I had surrouneded getting the right settings and my MVC system set up and linked together correctly. In addition I had issues with things that still leave me a bit confused in regards to compiling my site. Specfically, I ran into problems where I would run my project and would get different errors depending on what page I ran my project from which made little sense and gave me issues in figuring out what is acctually wrong. 
+The assignment for this week can be found [here](http://www.wou.edu/~morses/classes/cs46x/assignments/HW5.html). The assignment for this week had me starting to learn the database functionality of ASP.NET MVC 5. I had no experience over this subject prior to this week and I found it confusing at first and some of the biggest issues I had surrounded getting the right settings and my MVC system set up and linked together correctly. In addition I had issues with things that still leave me a bit confused in regards to running my site. Specifically, I ran into problems where I would run my project and would get different errors depending on what page I ran my project from which made little sense and gave me issues in figuring out what was actually wrong. Eventually the site created successfully but I got to completion with some confusion as to why some of the code was actually working. I imagine it probably has a bit to do with the magic of MVC and Visual studios that goes on behind the scenes.
 
-## Link to code on Github
+## Link to my code on Github
 The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_5) and some sample images of the code are also shown below.  
 
 ## Some Issues and initial steps
-I started this assignemnt in a way that eventually had me back track and start over multiple times due to having trouble connecting to the database, linking code together and having a not super solid understanding of what I was doing. However I think I eventually got a decent grasp over the end result of the project. For my vairables I used the required and naming conventions to help with there creations as shown below. I started with my model which looked like, 
+I started this assignment in a way that eventually had me back track and start over multiple times due to having trouble connecting to the database, linking code together and having a not super solid understanding of what I was doing. However I think I eventually got a decent grasp over the end result of the project. For my variables I used the required naming conventions to help with their creations as shown below. I started with my model which looked like, 
 
 
 ![wireframe](pics/Model.PNG "Model.PNG")
@@ -21,12 +21,12 @@ I started this assignemnt in a way that eventually had me back track and start o
 ## Controllers
 I used two controllers, One that was just a plain controller that linked to my index page, 
 
-![wireframe](pics/Cont1.PNG "Controller 1 img")
+![wireframe](pics/cont1.PNG "Controller 1 img")
 
 
 and another one, "RequestController" that handled serving the content of the create and view pages. a small peice of it is shown below.
 
-![wireframe](pics/Cont2.PNG "Controller 2 img")
+![wireframe](pics/cont2.PNG "Controller 2 img")
 
 
 
@@ -35,7 +35,7 @@ and another one, "RequestController" that handled serving the content of the cre
 ## Database Up.sql and Down.sql
 For the creation of the local database I used a simple down.sql that just simply dropped the table, and for the up.sql I followed the bitbucket class code examples but added in my own vairables rather then the "user" variables found on that page as shown below. When I wasn't getting errors the table was able to successfully build after I had put in the proper connectiong string to my web.config file
 
- '''<add name="FormContext" connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\kklie_000\Desktop\460_git\weeks\week_5\week5b\week5b\App_Data\Database1.mdf;Integrated Security=True" providerName="System.Data.SqlClient"/>'''
+ <add name="FormContext" connectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\kklie_000\Desktop\460_git\weeks\week_5\week5b\week5b\App_Data\Database1.mdf;Integrated Security=True" providerName="System.Data.SqlClient"/>
 
 
 I also had to make sure that my connection to the database wasn't set to master which was something that slowed me down as well but I was able to fix by changing it to my local file systems routing to the proper database. 
