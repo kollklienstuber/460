@@ -2,8 +2,10 @@
 @{
     ViewBag.Title = "Index";
 }
-<p>
-    @Html.ActionLink("Change of Address Form", "Create")
+<p style="text-align:center">
+    <br />
+    <br />
+    @Html.ActionLink("Create a new form!", "Create")
 </p>
 <table class="table">
     <tr>
@@ -14,22 +16,22 @@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DOB)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.NewAddress)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NewState)
+            @Html.DisplayNameFor(model => model.DOB)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Zip)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.County)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewState)
         </th>
         <th></th>
     </tr>
@@ -43,23 +45,23 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.NewAddress)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.DOB)
             </td>
-            <th>
-                @Html.DisplayFor(modelItem => item.NewAddress)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.City)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.NewState)
-            </th>
-            <th>
+            <td>
                 @Html.DisplayFor(modelItem => item.Zip)
-            </th>
-            <th>
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.County)
-            </th>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewState)
+            </td>
         </tr>
     }
 </table>

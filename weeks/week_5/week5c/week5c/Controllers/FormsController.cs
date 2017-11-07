@@ -2,10 +2,9 @@
 using week5c.Models;
 using System;
 using System.Web.Mvc;
+using System.Data.Entity;
 using week5c.DAL;
 using System.Net;
-using System.Data.Entity;
-
 
 namespace week5c.Controllers
 {
