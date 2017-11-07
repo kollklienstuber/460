@@ -29,6 +29,29 @@ and another one, "RequestController" that handled serving the content of the cre
 ![wireframe](pics/cont2.PNG "Controller 2 img")
 
 
+##Views of the actual page
+Below are some images of the site in action,
+
+For my create form page I used some action links and bootstrap styling to have it turn out looking like the below,
+
+![wireframe](pics/create.PNG "Controller 2 img")
+
+My landing page ended up looking like the below,
+
+![wireframe](pics/landing.PNG "landing page")
+
+My page to show all of the current forms looks like the below before it is populated with my up.sql script,
+
+![wireframe](pics/create1.PNG "create before up.sql")
+
+After my up.sql script is ran it gets populated with some information and in addition if I add in a person manually it displays the following,
+
+
+![wireframe](pics/create2.PNG "view forms")
+
+
+
+
 
 
 
@@ -57,7 +80,7 @@ My landing page view from my default controller was just a simple html action li
 
 ![wireframe](pics/view1.PNG "view1")
 
-For the views that handeled showing and updating the database they used multiple html action links and model binding so I was able to access the model with ease. Some code samples of these are shown below,
+For the views that handled showing and updating the database they used multiple html action links and model binding so I was able to access the model with ease. Some code samples of these are shown below,
 
 ![wireframe](pics/view2.PNG "age view")
 
@@ -69,7 +92,8 @@ My DAL file was also added in early on and it seemed to be one of the parts that
 
 ![wireframe](pics/DAL.PNG "DAL")
 
-Overall this assignment at first had me confused about working with Databases because of all the small parts of it and all the interconnectivity. I ran into a large amount of issues that were solved by usually finding a single line of code or adding in a library. I do feel more comfertable But I know I need to go back and make sure I have a bit more confidence with working with a database with MVC before moving on. 
+Overall this assignment at first had me confused about working with Databases because of all the small parts of it and all the interconnectivity. I ran into a large amount of issues that were solved by usually finding a single line of code or adding in a library. I do feel more comfortable but I know I need to go back and make sure I have a bit more confidence with working with a database with MVC before moving on. 
+
 
 
 
