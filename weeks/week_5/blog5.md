@@ -29,7 +29,7 @@ and another one, "RequestController" that handled serving the content of the cre
 ![wireframe](pics/cont2.PNG "Controller 2 img")
 
 
-##Views of the actual page
+## Views of the actual page
 Below are some images of the site in action,
 
 For my create form page I used some action links and bootstrap styling to have it turn out looking like the below,
