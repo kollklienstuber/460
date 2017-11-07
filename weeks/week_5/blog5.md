@@ -15,7 +15,7 @@ The full code for this assignment can be found [here](https://github.com/kollkli
 I started this assignemnt in a way that eventually had me back track and start over multiple times due to having trouble connecting to the database, linking code together and having a not super solid understanding of what I was doing. However I think I eventually got a decent grasp over the end result of the project. For my vairables I used the required and naming conventions to help with there creations as shown below. I started with my model which looked like, 
 
 
-![wireframe](pics/index.PNG "Model.PNG")
+![wireframe](pics/Model.PNG "Model.PNG")
 
 
 ## Controllers
