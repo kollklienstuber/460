@@ -17,7 +17,7 @@ namespace week5c.Controllers
         private DAL.FormContext db = new DAL.FormContext();
 
 
-
+        //returns the current set of dmv forms
         // GET: Forms
         public ActionResult Index()
         {
@@ -25,6 +25,7 @@ namespace week5c.Controllers
         }
 
         // GET: Forms/Create
+        //returns the view of the create dmv form page
         public ActionResult Create()
         {
             return View();
@@ -46,6 +47,7 @@ namespace week5c.Controllers
         }
 
         // POST: Forms/Edit/5
+        //validation and posts the new object created
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,DOB")] Form form)

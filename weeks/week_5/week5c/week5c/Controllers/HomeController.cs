@@ -8,6 +8,7 @@ namespace week5c.Controllers
     public class HomeController : Controller
     {
         // GET: Home
+        // returns the view for the home/index file
         public ActionResult Index()
         {
             return View();
