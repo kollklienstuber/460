@@ -12,6 +12,6 @@ namespace week7.Controllers
         {
             return View();
         }
-        
+
     }
 }
