@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HW6.Models.Product>
+@{
+    ViewBag.Title = "MultiProducts";
+}
+
+
+<h2 style="text-align:center;">
+    @Html.ActionLink("Home", "Index", "Product")
+</h2>
+
+
+<!--Background image to display-->
+<body background="/Content/img/trees.JPG">
+    <!--display current item that was requested-->
+    <center><h2 style="color:white"><span> @Html.DisplayFor(modelItem => modelItem.FirstOrDefault().ProductSubcategory.Name)</span></h2></center>
+
+
+
+    <!-- for each item in the requested sub category display info about it-->
+    @foreach (var product in Model)
+    {
+        <center>
+            <div class="col-md-3">
+                <div>
+                    <!--display name as link to individual product-->
+                    <h4><strong>@Html.ActionLink(product.Name, "IndividualProduct", new { id = product.ProductID })</strong></h4>
+                </div>
+
+                <div style="padding-bottom:10px">
+                    <!--display price-->
+                    <h4 style="color:white"> <strong>$@Html.DisplayFor(modelItem => product.ListPrice)</strong></h4>
+                </div>
+            </div>
+        </center>
+    }
+
+    <div style="text-align:center">
+        <ul class="pagination pagination-md">
+            <!--Depedning on if there is multiple pages or not, display the pages-->
+            @for (int i = 1; i <= ViewBag.NumberofPages; ++i)
+            {
+                <li>@Html.ActionLink(i.ToString(), "MultiProducts", new { id = Model.FirstOrDefault().ProductSubcategoryID, page = i })</li>
+            }
+        </ul>
+    </div>
+</body>

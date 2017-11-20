@@ -1,0 +1,47 @@
+﻿@model IEnumerable<HW6.Models.ProductReview>
+
+@{
+    ViewBag.Title = "ViewReviews";
+}
+
+<body background="/Content/img/uuu.JPG">
+
+    @Html.ActionLink("Back to store", "Index")
+
+    <table class="table" style="color:white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReviewDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReviewerName)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.ReviewDate)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rating)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
