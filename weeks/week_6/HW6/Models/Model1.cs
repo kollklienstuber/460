@@ -20,10 +20,10 @@ namespace HW6.Models
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductCostHistory> ProductCostHistories { get; set; }
-        public virtual DbSet<ProductDescription> ProductDescriptions { get; set; }
-        public virtual DbSet<ProductInventory> ProductInventories { get; set; }
         public virtual DbSet<ProductListPriceHistory> ProductListPriceHistories { get; set; }
         public virtual DbSet<ProductModel> ProductModels { get; set; }
+        public virtual DbSet<ProductDescription> ProductDescriptions { get; set; }
+        public virtual DbSet<ProductInventory> ProductInventories { get; set; }
         public virtual DbSet<ProductModelIllustration> ProductModelIllustrations { get; set; }
         public virtual DbSet<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCultures { get; set; }
         public virtual DbSet<ProductPhoto> ProductPhotoes { get; set; }

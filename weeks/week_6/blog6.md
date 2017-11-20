@@ -9,7 +9,7 @@
 The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_5) and some sample images of the code are also shown below.  
 
 
-##Video of [my project in action](youtubelink)
+##Video of [my project in action](https://www.youtube.com/watch?v=dzpZsnjT1TM&t=66s)
 
 ## The assignment and connecting to the database
 The assignment for this week can be found [here](http://www.wou.edu/~morses/classes/cs46x/assignments/HW6.html). The assignment for this week was one that gave me a large amount of trouble that came mostly from database connection issues. These issues came in a few different forms. One of the more common issues I ran into at the start was caused by the database file apparently being currently used and thus would consistently give me an error alerting me to close all open instances of the database even when I had. 
@@ -36,16 +36,25 @@ For the first feature which was to allow a customer or a user the ability to bro
 The main page of the project starts off 
 
 
-![wireframe](pics/cont1.PNG "Controller 1 img")
+![controller](pics/cont1.PNG "Controller 1 img")
 
 
 The data is pulled in through the database which is connected through the following 
 
-```cs
+![connection](pics/connection.PNG "Connection")
 
-   private Models.AdventureWorks db = new Models.AdventureWorks();
 
-```
+The main page is what shows the uses the different catagories to access and the controller used to give them access is shown below,
+
+![controller](pics/controller.PNG "controller")
+
+
+
+and the home page/index view gives users an option to select a catagory and then a sub category based on the selected elements,
+
+![index](pics/index.PNG "index")
+
+
 
 
 

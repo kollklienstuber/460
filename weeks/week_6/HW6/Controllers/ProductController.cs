@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net;
+using System.Web.Mvc.Html;
 using System.Web.Mvc;
 using System.Linq;
-using System.Web.Mvc.Html;
 
 namespace HW6.Controllers
 {
@@ -12,16 +12,18 @@ namespace HW6.Controllers
         
         public ActionResult Index(int? id)
         {
+            //if a product category was selected then throw into viewbag.
             var prodCategories = db.ProductCategories;
-       //find out if ProductCategory was selected
             if (id != null && db.ProductCategories.Find(id) != null)
             {
                 ViewBag.ID = id;
             }
-
+            //return view
             return View(prodCategories);
         }
-        //get request to find out if an id was given for a review, make and then send a review for a product.
+
+        //httpget request to determine the id that was given for what review 
+        //then sends review for a product if correctly completed.
         [HttpGet]
         public ActionResult Review(int? id)
         {
@@ -33,7 +35,7 @@ namespace HW6.Controllers
             if (productTitle == null) 
                 return HttpNotFound();
 
-            //new review data to send
+            //data created for a review that needs to be sent
             Models.ProductReview review = db.ProductReviews.Create();
             review.Product = productTitle;
             review.ProductID = productid;
@@ -44,10 +46,11 @@ namespace HW6.Controllers
         }
 
 
-        //if the data is valid then we will send the object to the database which can then be returned 
         [HttpPost]
         public ActionResult Review(Models.ProductReview review)
         {
+            //check to see if the data we get is valid
+            //if the data is valid then sent it to the database where it can be stored and returned 
             if (ModelState.IsValid)
             {
                 db.ProductReviews.Add(review);
