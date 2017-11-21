@@ -8,16 +8,16 @@
     <!--Back to catagories-->
     <h4 style="text-align:center">@Html.ActionLink(Model.ProductSubcategory.Name, "MultiProducts/" + Model.ProductSubcategoryID)</h4>
 
-    <div class="row col-md-12" style="background-color:rgba(0, 255, 247, 0.15);">
-        <h4><span style="color:white">@Html.DisplayFor(model => model.ProductModel.Name)</span></h4>
-        <!-- Display image  -->
-        <div class="row col-md-8">
-            <div class="col-md-3">
-                <img src="@Url.Action("ProductPhoto", "Product", new { ID = Model.ProductID, photo = true })" />
-            </div>
-
+    <!-- Display image  -->
+    <div align="center">
+        <div>
+            <img src="@Url.Action("ProductPhoto", "Product", new { ID = Model.ProductID, photo = true })" />
+        </div>
+        <div class="row col-md-12" style="background-color:rgba(0, 255, 247, 0.15);">
+            <h4><span style="color:white">@Html.DisplayFor(model => model.ProductModel.Name)</span></h4>
+         
             <!-- Display  product info-->
-            <dl class="dl-horizontal col-md-5" style="color:white">
+            <dl style="color:white;text-align:center">
                 <dt>
                     Model #:
                 </dt>

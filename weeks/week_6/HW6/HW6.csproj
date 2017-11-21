@@ -130,7 +130,7 @@
     <Compile Include="Models\Culture.cs" />
     <Compile Include="Models\Illustration.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\Model1.cs" />
+    <Compile Include="Models\AdventureWorksModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\ProductCostHistory.cs" />
@@ -166,7 +166,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\MultiProducts.cshtml" />
-    <Content Include="Views\Product\IndividualProduct.cshtml" />
+    <Content Include="Views\Product\SingleProduct.cshtml" />
     <Content Include="Views\Product\Review.cshtml" />
     <Content Include="Views\Product\ViewReviews.cshtml" />
     <None Include="Web.Debug.config">

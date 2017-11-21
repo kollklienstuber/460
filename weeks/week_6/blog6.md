@@ -9,7 +9,7 @@
 The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_5) and some sample images of the code are also shown below.  
 
 
-## Video of [my project up and running](https://www.youtube.com/watch?v=dzpZsnjT1TM&t=66s)
+## Video of [my project up and running](https://www.youtube.com/watch?v=AgZDPvlQo4E&feature=youtu.be)
 
 ## The assignment and connecting to the database
 The assignment for this week can be found [here](http://www.wou.edu/~morses/classes/cs46x/assignments/HW6.html). The assignment for this week was one that gave me a large amount of trouble that came mostly from database connection issues. These issues came in a few different forms. One of the more common issues I ran into at the start was caused by the database file apparently being currently used and thus would consistently give me an error alerting me to close all open instances of the database even when I had. 
