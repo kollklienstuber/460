@@ -1,7 +1,20 @@
 
+<a href="../../index.html" class="btn btn-primary btl-md" role="button">Back Home </a>
+
+# Overview of week Six
+
+
+
+## Link to my code on Github
+The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_5) 
+
+## Link to project hosted on Azure
+The project can be found [here](azurelink.com) 
+
+
+
 
 ##Steps 
-
 
 First off I created a new project in visusal studio 
 
@@ -18,3 +31,145 @@ I am wanting to first create the up and down .sql in order to initiate the types
 TO do this In the query that comes up when I double click my database and then select new query on it, i want to save the query as up.sql but I want to save it into my same folder that my project "hw8"'s database "artWork" is saved into. which is the appdata file and more specifically, this folder, "C:\Users\kklie_000\Desktop\460_git\weeks\week_8\hw8\hw8\App_Data"
 
 However once I add the file it will not show up and isn't added to my solution explorer until I right click my app data folder and add new item and then go and double click my up.sql file in my appData folder that I had recently created.
+
+For the first step we are instructed to, 
+"Begin with the domain model. There are four entities: Artist, ArtWork, Genre and Classification. This page explains the relations between entities and provides seed data. All relations must be present as named constraints in your database schema. Draw or generate an E-R diagram of your database schema."
+
+How I went about this was after understanding that we have the following data that we are wanting to add into the database, 
+
+![data](pictures/data.PNG "data")
+
+
+I used that information to construct in my up.sql the way the data will be held in the database.
+
+There are four different entities that will become a table, I started with Artist. For my artists table in particular and the three other tables I worked with the following information like the following but with whatever table I was currently on,  
+![arttable](pictures/arttable.PNG "arttable")
+This information tells me that I will want to have as my data in the table, a primary key as a way to identify a single artist, a name for the artist, and the birthplace of an artist. The following tables ended up looking like, 
+
+```sql
+-- Users table
+CREATE TABLE dbo.Artists
+(	
+	--artist PK as ID
+	ArtistID	INT IDENTITY (1,1) NOT NULL,
+	--Artist name, city as 128 length char
+	ArtistName	NVARCHAR(128) NOT NULL,
+	ArtistCity NVARCHAR(128) NOT NULL,
+	--Artist Date of birth as Date object
+	ArtistDOB	Date NOT NULL,
+	-- constraints for a PK
+	CONSTRAINT [PK_dbo.Artists] PRIMARY KEY CLUSTERED (ArtistID ASC)
+);
+
+CREATE TABLE dbo.ArtWorks
+(
+	ArtWorkID	INT IDENTITY (1,1) NOT NULL,
+	ArtistID INT,
+	ArtistName	NVARCHAR(128) NOT NULL,
+	Title	NVARCHAR(64) NOT NULL,
+	CONSTRAINT [PK_dbo.ArtWorks] PRIMARY KEY CLUSTERED (ArtWorkID ASC),
+	CONSTRAINT FK_ArtistID FOREIGN KEY (ArtistID)
+	REFERENCES Artists(ArtistID)
+);
+
+CREATE TABLE dbo.Genres
+(
+	--sense Genres is a single column table we dont need to link it to anything VIA a FK 
+	--Genre is linked to others because others (classifications) needs to know about it, 
+	--but it doesnt need to know about anyone else
+	GenreID			INT IDENTITY (1,1) NOT NULL,
+	GenreName	NVARCHAR(64) NOT NULL,
+	CONSTRAINT [PK_dbo.Genres] PRIMARY KEY CLUSTERED (GenreID ASC)
+);
+
+
+CREATE TABLE dbo.Classifications
+(
+	--classifications doesnt have much data (only two columns) but all the data it does have is 
+	--a FK of other tables so we must reference and add them.
+	ClassificationID		INT IDENTITY (1,1) NOT NULL,
+	ArtWork		NVARCHAR(64) NOT NULL,
+	Genre		NVARCHAR(64) NOT NULL,
+	GenreID INT,
+	ArtWorkID INT,
+	CONSTRAINT [PK_dbo.Classifications] PRIMARY KEY CLUSTERED (ClassificationID ASC),
+	--We will add in Genre sense it is used in classifications table so we must have some reference to it
+	CONSTRAINT FK_GenreID FOREIGN KEY (GenreID)
+	REFERENCES Genres(GenreID),
+	--Same as above but with Artwork Table
+	CONSTRAINT FK_ArtWorkID FOREIGN KEY (ArtWorkID)
+	REFERENCES ArtWorks(ArtWorkID)
+);
+
+
+--Once tables are created insert into them the appropriate data
+
+--Insert into artists table
+INSERT INTO dbo.Artists (ArtistName,ArtistCity,ArtistDOB) VALUES 
+	('M.C. Escher','Leeuwarden, Netherlands','1898-06-17 00:00:00'),
+	('Leonardo Da Vinci','Vinci, Italy','1519-04-02 00:00:00'),
+	('HAtip Mehmed Efendi','Unknown','1680-10-18 00:00:00'),
+	('Salvador Dali','Leeuwarden, Figueres, Spain','1904-05-11 00:00:00')
+GO
+
+--Insert into ArtWorks table
+INSERT INTO dbo.ArtWorks (ArtistName,Title) VALUES 
+	('M.C. Escher','Circle Limit III'),
+	('M.C. Escher','Twon Tree'),
+	('Leonardo Da Vinci','Mona Lisa'),
+	('Hatip Mehmed Efendi','Ebru'),
+	('Salvador Dali','Honey Is Sweeter Than Blood')
+GO
+
+--Insert into Classifications table
+INSERT INTO dbo.Classifications(Artwork, Genre) VALUES 
+	('Circle Limit III','Tesselation'),
+    ('Twon Tree','Tesselation'),
+	('Twon Tree','Surrealism'),
+	('Mona Lisa','Portrait'),
+	('Mona Lisa','Renaissance'),
+	('The Vitruvian Man','Renaissance'),
+	('Ebru','Tesselation'),
+	('Honey Is Sweeter Than Blood','Surrealism');
+GO
+
+--Insert into Classifications table
+INSERT INTO dbo.Genres(GenreName) VALUES 
+	('Tesselation'),
+    ('Surrealism'),
+	('Portrait'),
+	('Renaissance');
+GO
+
+
+```
+
+
+For my Genre Table and Artist table I did not need to reference any Forien Keys (FK) because the data it had was not data that relied on any other tables. Unlike the Classifications or the Artwork table, which did need FK's. For example the Classifications table needed 2 FK's. One from Genre and one from Artworks. The classifications table essentially didn't have any unique data. Unlike the Artwork table which had a combination of Unique and non unique (Artist) data.
+
+Once I had my tables created Then I want to go ahead and connect to my data base and then insert the data into it. To do this i had to,
+1: click the connect button next to the empty (white) text box
+2: click local ->mssqllocalDB -> connect (like below image)
+![connect](connect/data.PNG "data")
+3: Once its connected then I can click the white empty text box and change it to the path of my database, 
+![connect](connect/path.PNG "path")
+4: it is now connected and so I can, if i want to check it worked, double click my artwork.mdf and view the tables.
+
+
+Next I want to fill my tables with data, to do this I just highlight the query text and run it again.
+To see if this worked and to see if the data is entered I can again double click my database, right click a table, and show table data to see the newly populated information.
+
+##down.sql 
+
+For my down.sql it was the same steps as the above, except with the following code used for the down.sql. 
+
+
+```sql
+DROP TABLE IF EXISTS dbo.Classifications;
+DROP TABLE IF EXISTS dbo.ArtWorks;
+DROP TABLE IF EXISTS dbo.Genres;
+DROP TABLE IF EXISTS dbo.Artists;
+```
+
+
+
