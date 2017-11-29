@@ -13,18 +13,29 @@ namespace hw8.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult ArtWorks()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+
+        public ActionResult Artists()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your application description page.";
 
             return View();
         }
+
+
+
+        public ActionResult Classifications()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+       
     }
 }

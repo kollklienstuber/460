@@ -172,4 +172,57 @@ DROP TABLE IF EXISTS dbo.Artists;
 ```
 
 
+##creating shared layouts
+The next step:
+Place a menu item on the shared layout to select one of three views: Artists, ArtWorks and Classifications. Each of these views should show all artists, works of art and classifications, respectively, that are in the database. i.e. they are each a list view. Also add a home page with some form of a welcome.
+
+
+TO do this I started by creating the home page. The home page was simple in the sense that all i did to it was remove the auto created code and just put in a few sentinces about art.
+
+Next I went and created the links in the shared layout. to do this I just changed the current links to the new links to pages that I created.
+
+```html
+
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>
+```
+
+changed to 
+
+
+
+```html
+      			<ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Artists", "Artists", "Home")</li>
+                    <li>@Html.ActionLink("ArtWorks", "ArtWorks", "Home")</li>
+                    <li>@Html.ActionLink("Classifications", "Classifications", "Home")</li>
+                </ul>
+```
+
+
+Next I created my pages above as views in my home folder so that the links took a user to the correct page.
+
+
+
+Next I wanted to auto generate my connect string and my model classes. To do this the steps were,
+1:right click models 
+2: add new item
+3: on the code tab select data and then select ado.net entity data model and give it a name. 
+4: select the code first from database option 
+5: next it will ask "which data connection should your application use and for this I want to click new connection"
+6: in the new window i want to select the data source as a database file and then select the database file name to be my .mdf database I created for the project.
+7: use windows authenitfication and test connection and then connect.
+8: on the next page I want to save the connection string as what it defaults to. 
+9: select all the tables to be generated, plurilize the names for readability sake and click finish
+
+
+If all goes well then the models are now created automatically in the project. However we still need to add restrictions to certain peices of data like not letting an artists birthday be a date in the future.
+
+
 
