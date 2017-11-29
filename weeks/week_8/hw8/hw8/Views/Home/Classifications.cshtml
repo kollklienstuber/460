@@ -1,7 +1,28 @@
-﻿
+﻿@model IEnumerable<hw8.Models.Classification>
 @{
     ViewBag.Title = "Classifications";
 }
 
-<h2>Classifications</h2>
+<h2 style="text-align:center">Data from classifications table:</h2>
 
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtWork)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtWork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+        </tr>
+    }
+</table>

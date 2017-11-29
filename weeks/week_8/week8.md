@@ -1,7 +1,7 @@
 
 <a href="../../index.html" class="btn btn-primary btl-md" role="button">Back Home </a>
 
-# Overview of week Six
+# Overview of week eight
 
 
 
@@ -244,6 +244,120 @@ The models for this project after being auto generated didnt need a lot of work,
 
 
 ```
+
+
+
+
+
+At this point I have my models and database up as well as some initial views, but now after having the backend system created and ready we want to give users the ability to view the data in our database as well as have crud functionality for our artists. in addition I started working with my controller, "homecontroller" to work with the corresponding pages.
+
+In my home controller I added in private dbContext db = new dbContext(); so I am able to use the database like below. 
+In addition I added in the includes to my homeController the following, 
+
+using System.Net;
+using System.Data.Entity;
+using hw8.Models;
+
+
+
+```cs
+
+    public class HomeController : Controller
+    {
+
+        //remember to include hw8.Models;
+        private dbContext db = new dbContext();
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+```
+
+
+
+
+The first page I started with was my classifications page. To show the information of my classifications page I modified my controller so that the data is in a new list of string instances which I can use in my view.
+
+```cs
+       //returns classifictions 
+        public ActionResult Classifications()
+        {
+            return View(db.Classifications.ToList());
+        }
+
+```
+
+
+```html
+@model IEnumerable<hw8.Models.Classification>
+@{
+    ViewBag.Title = "Classifications";
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtWork)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArtWork)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+        </tr>
+    }
+</table>
+
+```
+
+
+I did the same thing for my artworks view except replaced
+
+
+```html
+
+   <th>
+            @Html.DisplayNameFor(model => model.ArtWork)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genre)
+        </th>
+
+``` 
+
+with
+
+```html
+
+		<th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Artist)
+        </th>
+
+``` 
+
+Again i did the same thing for my genre view but with the data being changed to the data in my genre table.
+
+These are things done in previous labs so didn't come with much issue.
+
+
+
+## crud for artists as well as artists view
+For my artists page I started with the ability to just view the artists like the above views. However I also wanted to give each artist the CRUD abilities
+
+To do this I started with my 
+
 
 
 
