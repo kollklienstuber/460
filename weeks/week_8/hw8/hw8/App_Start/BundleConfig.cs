@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace week7
+namespace hw8
 {
     public class BundleConfig
     {

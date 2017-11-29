@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace week7
+namespace hw8
 {
     public class FilterConfig
     {
