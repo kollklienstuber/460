@@ -34,6 +34,51 @@ namespace hw8.Controllers
         }
 
 
+
+        //our get for creating an artist
+        public ActionResult CreateArtist()
+        {
+            return View();
+        }
+
+        //post artist
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateArtist([Bind(Include = "ArtistID, ArtistName, ArtistDOB, ArtistCity")] Artist artist)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Artists.Add(artist);
+                db.SaveChanges();
+                return RedirectToAction("Artists");
+            }
+
+            return View(artist);
+        }
+
+
+        //get artist details
+        public ActionResult ArtistRead(int? id)
+        {
+            // if product id wasn't given
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //find our artist to use by id given
+            var artist = db.Artists.Find(id);
+        
+
+            //place the data of the artists into a viewbag that we can use to return to user.
+            ViewBag.ArtistName = artist.ArtistName;
+            ViewBag.ArtistCity = artist.ArtistCity;
+            ViewBag.ArtistDOB = artist.ArtistDOB;
+            //store artworks where artist id equals FK of artworks.
+            var Artwork = db.ArtWorks.Where(c => c.ArtistID == id).Select(c => c.Title);
+
+            return View();
+        }
+
+
+
         //returns classifictions 
         public ActionResult Classifications()
         {

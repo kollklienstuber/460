@@ -5,17 +5,17 @@
 
 
 <h2 style="text-align:center">Data from Artists table:</h2>
+
+<div class="btn-group">
+    @Html.ActionLink("Create an Artist", "CreateArtist", "Home", null, new { @class = "btn btn-default" })
+</div>
+
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ArtistName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArtistCity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ArtistDOB)
-        </th>
+
     </tr>
     @foreach (var item in Model)
     {
@@ -23,13 +23,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ArtistName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArtistCity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArtistDOB)
-            </td>
+   
         </tr>
 
     }
+
+
+
+
 </table>

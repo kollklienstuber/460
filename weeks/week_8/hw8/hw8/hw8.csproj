@@ -205,6 +205,8 @@
     <Content Include="Views\Home\Artists.cshtml" />
     <Content Include="Views\Home\ArtWorks.cshtml" />
     <Content Include="Views\Home\Classifications.cshtml" />
+    <Content Include="Views\Home\CreateArtist.cshtml" />
+    <Content Include="Views\Home\ArtistRead.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -1,0 +1,34 @@
+﻿@model hw8.Models.Artist
+@{
+    ViewBag.Title = "ArtistRead";
+}
+
+<h2>ArtistRead</h2>
+
+
+<div>
+  
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ArtistName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistDOB)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ArtistDOB)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtistCity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ArtistCity)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Back to Artists", "Artists")
+</div>

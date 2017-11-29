@@ -354,10 +354,56 @@ These are things done in previous labs so didn't come with much issue.
 
 
 ## crud for artists as well as artists view
-For my artists page I started with the ability to just view the artists like the above views. However I also wanted to give each artist the CRUD abilities
+Here are the 5 items needed:
 
-To do this I started with my 
+1: Artist Index/List page
+2: Artist Create page (Create)
+3: Artist Details page (Read)
+4: Artist Edit page (Update)
+5: Artist Delete page (Delete)
 
+To do this I started with making my main artists page with just displays data from the artists table similar to the above views. This took care of the following step number 1
+
+For step 2, create I started by making my create actionresult in my controller and my page to create. The action result for my create get was looked like this,
+
+```cs
+     public ActionResult CreateArtist()
+        {
+            return View();
+        }
+
+```
+
+and my post for the created looked as follows,
+
+
+
+```cs
+             //post artist
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateArtist([Bind(Include = "ArtistID, ArtistName, ArtistDOB, ArtistCity")] Artist artist)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Artists.Add(artist);
+                db.SaveChanges();
+                return RedirectToAction("Artists");
+            }
+
+            return View(artist);
+        }
+
+```
+
+I then went and added in the create view.
+
+
+
+For our details page The view consited of displayed the data that is searched for in the database using     
+```cs Artist artist = db.ArtWork.Find(id); ```
+
+and if the artist exists then we store the information for the artists in our post controller using viewbags that we will return to the view.
 
 
 
