@@ -75,7 +75,7 @@ GO
 --Insert into Classifications table
 INSERT INTO dbo.Classifications(Artwork, Genre) VALUES 
 	('Circle Limit III','Tesselation'),
-    ('Twon Tree','Tesselation'),
+	('Twon Tree','Tesselation'),
 	('Twon Tree','Surrealism'),
 	('Mona Lisa','Portrait'),
 	('Mona Lisa','Renaissance'),
@@ -87,7 +87,7 @@ GO
 --Insert into Classifications table
 INSERT INTO dbo.Genres(GenreName) VALUES 
 	('Tesselation'),
-    ('Surrealism'),
+	('Surrealism'),
 	('Portrait'),
 	('Renaissance');
 GO

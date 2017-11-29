@@ -224,5 +224,26 @@ Next I wanted to auto generate my connect string and my model classes. To do thi
 
 If all goes well then the models are now created automatically in the project. However we still need to add restrictions to certain peices of data like not letting an artists birthday be a date in the future.
 
+## working with models 
+
+The models for this project after being auto generated didnt need a lot of work, the only changes that I made to my models were the following,
+1: for my artists I added the following  [Display(Name = "Full Name")] or whatever to each appropriate data type. in addition i added  [Key] above my classification id
+
+
+```cs
+
+        [Required]
+        [StringLength(128)]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required]
+        [StringLength(128)]
+        [Display(Name = "Birth City")]
+        public string BirthCity { get; set; }
+
+
+```
+
 
 

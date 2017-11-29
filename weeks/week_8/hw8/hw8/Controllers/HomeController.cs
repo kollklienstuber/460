@@ -15,7 +15,6 @@ namespace hw8.Controllers
 
         public ActionResult ArtWorks()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
@@ -23,7 +22,6 @@ namespace hw8.Controllers
 
         public ActionResult Artists()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
@@ -32,7 +30,6 @@ namespace hw8.Controllers
 
         public ActionResult Classifications()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }

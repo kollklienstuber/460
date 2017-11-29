@@ -8,6 +8,7 @@ namespace hw8.Models
 
     public partial class Classification
     {
+        [Key]
         public int ClassificationID { get; set; }
 
         [Required]
