@@ -7,26 +7,36 @@
 <h2 style="text-align:center">Data from Artists table:</h2>
 
 <div class="btn-group">
-    @Html.ActionLink("Create an Artist", "CreateArtist", "Home", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Create an Artist", "CreateArtist", "Home", null, new { @class = "btn btn-primary" })
 </div>
 
-<table class="table">
-    <tr>
-        <th>
+<table class="table" style="border: 5px solid black;">
+    <tr style="border: 5px solid black;">
+        <th style="border: 5px solid black;">
             @Html.DisplayNameFor(model => model.ArtistName)
         </th>
 
-    </tr>
+    </tr style="border:>
+
     @foreach (var item in Model)
     {
-        <tr>
+        <tr style="border: 5px solid black;">
             <td>
                 @Html.DisplayFor(modelItem => item.ArtistName)
             </td>
-   
+            <!---links to details edit and delete pages and controller-->
+            <td>
+                @Html.ActionLink("Details of artist", "ArtistRead", new { id = item.ArtistID })
+            </td>
+            <td>
+                @Html.ActionLink("Edit artist", "ArtistUpdate", new { id = item.ArtistID })
+            </td>
+            <td>
+                @Html.ActionLink("Delete artist", "ArtistDelete", new { id = item.ArtistID })
+            </td>
         </tr>
-
     }
+
 
 
 

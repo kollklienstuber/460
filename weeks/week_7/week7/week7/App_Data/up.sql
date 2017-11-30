@@ -1,0 +1,8 @@
+﻿CREATE TABLE dbo.GifLogs
+(
+	ID					INT IDENTITY (1,1)	NOT NULL,
+	QTime				DATETIME	NOT NULL,
+	Qagent				VARCHAR(128),
+	gifQuery			VARCHAR(128),
+	CONSTRAINT [PK_dbo.GifLogs] PRIMARY KEY CLUSTERED (ID ASC)
+);

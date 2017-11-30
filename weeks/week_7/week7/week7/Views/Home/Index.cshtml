@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>GIf Search</h1>
+<p> Search for gifs!</p>
+</div>
+
+
+
+<div>
+    <div class="row text-center">
+        <div>
+            <form method="post">
+                <!--user input-->
+                <input class="form-control, text-center" id="QueryU" name="QueryU" type="text" />
+                <!-- Submit Button-->
+                <input class="btn btn-primary" type="button" id="search" name="search" value="Search" />
+            </form>
+        </div>
+    </div>
+    <!-- Div to contain outputs of images -->
+    <div class="row text-center" id="results"></div>
+</div>
+
+
+
+
+
+
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/gifSCript.js"></script>
+}
+

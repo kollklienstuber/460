@@ -9,9 +9,12 @@ using hw8.Models;
 
 namespace hw8.Controllers
 {
+
+
+
+
     public class HomeController : Controller
     {
-
         //remember to include hw8.Models;
         private dbContext db = new dbContext();
         //returns index view of our mostly blank homepage that links to other pages
@@ -20,6 +23,9 @@ namespace hw8.Controllers
             return View();
         }
 
+
+
+
         public ActionResult ArtWorks()
         {
 
@@ -27,9 +33,9 @@ namespace hw8.Controllers
         }
 
 
+    
         public ActionResult Artists()
         {
-
             return View(db.Artists.ToList());
         }
 
@@ -57,6 +63,68 @@ namespace hw8.Controllers
         }
 
 
+        // GET: Artists/Edit/
+        public ActionResult ArtistUpdate(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Artist artist = db.Artists.Find(id);
+            if (artist == null)
+            {
+                return HttpNotFound();
+            }
+            return View(artist);
+        }
+
+        // POST: Artists/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ArtistUpdate([Bind(Include = "ArtistID,ArtistName,ArtistDOB,ArtistCity")] Artist artist)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(artist).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Artists");
+            }
+            return View(artist);
+        }
+
+
+
+        // GET: Artists/Delete
+        public ActionResult ArtistDelete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Artist Artists = db.Artists.Find(id);
+            if (Artists == null)
+            {
+                return HttpNotFound();
+            }
+            return View(Artists);
+        }
+
+        // POST: Users/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult ArtistDeleteConfirmed(int id)
+        {
+            Artist artist = db.Artists.Find(id);
+            db.Artists.Remove(artist);
+            db.SaveChanges();
+            return RedirectToAction("Artists");
+        }
+
+
+
+ 
+
+
         //get artist details
         public ActionResult ArtistRead(int? id)
         {
@@ -71,12 +139,12 @@ namespace hw8.Controllers
             ViewBag.ArtistName = artist.ArtistName;
             ViewBag.ArtistCity = artist.ArtistCity;
             ViewBag.ArtistDOB = artist.ArtistDOB;
+
             //store artworks where artist id equals FK of artworks.
             var Artwork = db.ArtWorks.Where(c => c.ArtistID == id).Select(c => c.Title);
 
-            return View();
+            return View(artist);
         }
-
 
 
         //returns classifictions 
@@ -84,8 +152,6 @@ namespace hw8.Controllers
         {
             return View(db.Classifications.ToList());
         }
-
-
        
     }
 }
