@@ -6,7 +6,7 @@
 
 
 ## Link to my code on Github
-The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_5) 
+The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_8) 
 
 ## Link to project hosted on Azure
 The project can be found [here](azurelink.com) 
@@ -14,7 +14,7 @@ The project can be found [here](azurelink.com)
 
 
 
-##Steps 
+## Steps 
 
 First off I created a new project in visusal studio 
 
@@ -43,7 +43,9 @@ How I went about this was after understanding that we have the following data th
 I used that information to construct in my up.sql the way the data will be held in the database.
 
 There are four different entities that will become a table, I started with Artist. For my artists table in particular and the three other tables I worked with the following information like the following but with whatever table I was currently on,  
+
 ![arttable](pictures/arttable.PNG "arttable")
+
 This information tells me that I will want to have as my data in the table, a primary key as a way to identify a single artist, a name for the artist, and the birthplace of an artist. The following tables ended up looking like, 
 
 ```sql
@@ -150,16 +152,20 @@ For my Genre Table and Artist table I did not need to reference any Forien Keys 
 Once I had my tables created Then I want to go ahead and connect to my data base and then insert the data into it. To do this i had to,
 1: click the connect button next to the empty (white) text box
 2: click local ->mssqllocalDB -> connect (like below image)
+
 ![connect](pictures/data.PNG "data")
+
 3: Once its connected then I can click the white empty text box and change it to the path of my database, 
+
 ![connect](pictures/path.PNG "path")
+
 4: it is now connected and so I can, if i want to check it worked, double click my artwork.mdf and view the tables.
 
 
 Next I want to fill my tables with data, to do this I just highlight the query text and run it again.
 To see if this worked and to see if the data is entered I can again double click my database, right click a table, and show table data to see the newly populated information.
 
-##down.sql 
+## down.sql 
 
 For my down.sql it was the same steps as the above, except with the following code used for the down.sql. 
 
@@ -172,7 +178,7 @@ DROP TABLE IF EXISTS dbo.Artists;
 ```
 
 
-##creating shared layouts
+## creating shared layouts
 The next step:
 Place a menu item on the shared layout to select one of three views: Artists, ArtWorks and Classifications. Each of these views should show all artists, works of art and classifications, respectively, that are in the database. i.e. they are each a list view. Also add a home page with some form of a welcome.
 
@@ -375,7 +381,6 @@ For step 2, create I started by making my create actionresult in my controller a
 ```
 
 and my post for the created looked as follows,
-
 
 
 ```cs
