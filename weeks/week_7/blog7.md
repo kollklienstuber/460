@@ -4,6 +4,8 @@
 # Overview of week seven
 
 
+Not finished, have ran into multiple problems but wanted to focus on weeks eight and nine due to them alligning with the final
+
 
 ## Link to my code on Github
 The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_7) and some sample images of the code are also shown below.  

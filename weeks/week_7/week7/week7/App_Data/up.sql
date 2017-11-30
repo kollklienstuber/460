@@ -2,7 +2,7 @@
 (
 	ID					INT IDENTITY (1,1)	NOT NULL,
 	QTime				DATETIME	NOT NULL,
-	Qagent				VARCHAR(128),
-	gifQuery			VARCHAR(128),
+	QAgent				VARCHAR(64),
+	gifQuery			VARCHAR(64),
 	CONSTRAINT [PK_dbo.GifLogs] PRIMARY KEY CLUSTERED (ID ASC)
 );
