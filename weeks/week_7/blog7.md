@@ -22,19 +22,21 @@ To do this i needed to place the path to my key that is saved locally on my mach
 My next step was to create my main view and the only view that will be displayed for this assignment being that the Ajax will limit the need to refresh or need additional views.
 
 
-My  
-
 
 ## controllers
 
 My controllers for this assignment consisted of two different controllers. 
 My home controller returned the view to index via an actionmethod.
 
-My second controller was the controller that handled most of the 
+My second controller was the controller that handled most of the functionality and ajax but this was something I had many versions of due to trying to fix errors but haven't gotten a succesful link yet.
 
 
-## models 
-For my models I 
 
+## database 
 
+I decided to at least create the foundation of my database but have not yet gotten it working with the log data that will be put into the database. My up.sql and down sql view as follows,
+
+![connect](pics/up.PNG "data")
+
+![connect](pics/down.PNG "data")
 

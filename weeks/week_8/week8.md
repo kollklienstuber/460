@@ -150,9 +150,9 @@ For my Genre Table and Artist table I did not need to reference any Forien Keys 
 Once I had my tables created Then I want to go ahead and connect to my data base and then insert the data into it. To do this i had to,
 1: click the connect button next to the empty (white) text box
 2: click local ->mssqllocalDB -> connect (like below image)
-![connect](connect/data.PNG "data")
+![connect](pictures/data.PNG "data")
 3: Once its connected then I can click the white empty text box and change it to the path of my database, 
-![connect](connect/path.PNG "path")
+![connect](pictures/path.PNG "path")
 4: it is now connected and so I can, if i want to check it worked, double click my artwork.mdf and view the tables.
 
 
