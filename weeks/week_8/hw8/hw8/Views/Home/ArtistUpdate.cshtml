@@ -7,6 +7,10 @@
 {
     @Html.AntiForgeryToken()
 
+
+    <h2>You are editing an artist</h2>
+    <hr />
+    <hr />
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ArtistID)
@@ -39,5 +43,5 @@
     </div>
 }
 <div>
-    Html.ActionLink("Back to artists", "Artists");
+    @Html.ActionLink("Back Home!", "Artists", "Home", null, new { @class = "btn btn-primary" })
 </div>

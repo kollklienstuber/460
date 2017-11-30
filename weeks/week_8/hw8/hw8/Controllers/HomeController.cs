@@ -25,7 +25,7 @@ namespace hw8.Controllers
 
 
 
-
+        //for returning artworks 
         public ActionResult ArtWorks()
         {
 
@@ -33,7 +33,8 @@ namespace hw8.Controllers
         }
 
 
-    
+        //for returning artists 
+
         public ActionResult Artists()
         {
             return View(db.Artists.ToList());
@@ -41,7 +42,7 @@ namespace hw8.Controllers
 
 
 
-        //our get for creating an artist
+        // our get for creating an artist
         public ActionResult CreateArtist()
         {
             return View();
@@ -94,7 +95,7 @@ namespace hw8.Controllers
 
 
 
-        // GET: Artists/Delete
+        // GET: Delete
         public ActionResult ArtistDelete(int? id)
         {
             if (id == null)
@@ -109,10 +110,11 @@ namespace hw8.Controllers
             return View(Artists);
         }
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
+
+        //Post delete
+        [HttpPost, ActionName("ArtistDelete")]
         [ValidateAntiForgeryToken]
-        public ActionResult ArtistDeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Artist artist = db.Artists.Find(id);
             db.Artists.Remove(artist);
@@ -128,19 +130,19 @@ namespace hw8.Controllers
         //get artist details
         public ActionResult ArtistRead(int? id)
         {
-            // if product id wasn't given
+            // First look at it the id wasnt even given
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //find our artist to use by id given
+            //if they are given then we search and find by PK artist id
             var artist = db.Artists.Find(id);
         
 
-            //place the data of the artists into a viewbag that we can use to return to user.
+            //using viewbags to palce the given artists information to return later to user.
             ViewBag.ArtistName = artist.ArtistName;
             ViewBag.ArtistCity = artist.ArtistCity;
             ViewBag.ArtistDOB = artist.ArtistDOB;
 
-            //store artworks where artist id equals FK of artworks.
+            // store artworks where artist id equals FK of artworks.
             var Artwork = db.ArtWorks.Where(c => c.ArtistID == id).Select(c => c.Title);
 
             return View(artist);
