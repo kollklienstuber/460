@@ -1,12 +1,33 @@
-﻿@{
+﻿@model IEnumerable<hw8.Models.Genre>
+@{
     ViewBag.Title = "Home Page";
 }
+
+
+
+@foreach (var genre in Model.ToList())
+{
+    <input class="btn btn-primary" style="text-align:center" type="button" value=@genre.GenreName onclick="ajaxCall('@genre.GenreID')" />
+}
+
+
+<div class="row" id="tableData">
+
+
+</div>
+
+
 
 <div class="jumbotron">
     <h1>View some Art Koll</h1>
     <p class="lead">Here you can find information on artists and the work they have done <br />
-    Click on the links above to navigate around the site!</p>
- 
-   
+    Click on the links above to navigate around the site!</p>   
 </div>
+
+
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/ajaxFunction.js"></script>
+}
 

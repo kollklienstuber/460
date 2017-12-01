@@ -4,7 +4,7 @@ CREATE TABLE dbo.Artists
 	--artist PK as ID
 	ArtistID	INT IDENTITY (1,1) NOT NULL,
 	--Artist name, city as 128 length char
-	ArtistName	NVARCHAR(128) NOT NULL,
+	ArtistName	NVARCHAR(64) NOT NULL,
 	ArtistCity NVARCHAR(128) NOT NULL,
 	--Artist Date of birth as Date object
 	ArtistDOB	Date NOT NULL,

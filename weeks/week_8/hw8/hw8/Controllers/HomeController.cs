@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Net;
 using System.Data.Entity;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
 using hw8.Models;
 
 namespace hw8.Controllers
@@ -18,12 +19,7 @@ namespace hw8.Controllers
         //remember to include hw8.Models;
         private dbContext db = new dbContext();
         //returns index view of our mostly blank homepage that links to other pages
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-
+  
 
         //for returning artworks 
         public ActionResult ArtWorks()
@@ -154,6 +150,39 @@ namespace hw8.Controllers
         {
             return View(db.Classifications.ToList());
         }
-       
+
+
+
+
+        public ActionResult Index(int? id)
+        {
+            var genreCategories = db.Genres;
+
+            //make sure id isn't null
+            if (id != null && db.Genres.Find(id) != null)
+            {
+                //store in viewbag
+                ViewBag.ID = id;
+            }
+            return View(genreCategories);
+        }
+
+        public ActionResult Ajax(int? id)
+        {
+            //find the generid of the id passed in to work with.
+            var data = db.Genres.Where(t => t.GenreID == id) 
+                //find the data from classifications table
+                .Select(t => t.Classifications)
+                //order
+                .First()
+                //pull in title and artist
+                .Select(t => new { t.ArtWork1.ArtistName, t.ArtWork1.Title })
+                //order by title and send to list to return
+                .OrderBy(t => t.Title)
+                .ToList();
+            //return Json object
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

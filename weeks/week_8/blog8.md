@@ -16,11 +16,11 @@ The project can be found [here](azurelink.com)
 
 ## Steps 
 
-First off I created a new project in visusal studio 
+First off I created a new project in visual studio 
 
 file -> new project -> asp.net web application and named it HW8.
 
-I created it by having the MVC icon highlighted in order to have a few automattically created pages.
+I created it by having the MVC icon highlighted in order to have a few automatically created pages.
 
 Once My project was created I went in and right clicked my app data folder and added a new sql server database called artWork. This created artWork.mdf and artWork_log.ldf in my app_data folder and gave me an initial database to work with.
 
@@ -37,7 +37,7 @@ For the first step we are instructed to,
 
 How I went about this was after understanding that we have the following data that we are wanting to add into the database, 
 
-![data](pictures/data.PNG "data")
+![data](pictures/data.PNG "data")   
 
 
 I used that information to construct in my up.sql the way the data will be held in the database.
@@ -51,56 +51,56 @@ This information tells me that I will want to have as my data in the table, a pr
 ```sql
 -- Users table
 CREATE TABLE dbo.Artists
-(	
-	--artist PK as ID
-	ArtistID	INT IDENTITY (1,1) NOT NULL,
-	--Artist name, city as 128 length char
-	ArtistName	NVARCHAR(128) NOT NULL,
-	ArtistCity NVARCHAR(128) NOT NULL,
-	--Artist Date of birth as Date object
-	ArtistDOB	Date NOT NULL,
-	-- constraints for a PK
-	CONSTRAINT [PK_dbo.Artists] PRIMARY KEY CLUSTERED (ArtistID ASC)
+(   
+    --artist PK as ID
+    ArtistID    INT IDENTITY (1,1) NOT NULL,
+    --Artist name, city as 128 length char
+    ArtistName  NVARCHAR(128) NOT NULL,
+    ArtistCity NVARCHAR(128) NOT NULL,
+    --Artist Date of birth as Date object
+    ArtistDOB   Date NOT NULL,
+    -- constraints for a PK
+    CONSTRAINT [PK_dbo.Artists] PRIMARY KEY CLUSTERED (ArtistID ASC)
 );
 
 CREATE TABLE dbo.ArtWorks
 (
-	ArtWorkID	INT IDENTITY (1,1) NOT NULL,
-	ArtistID INT,
-	ArtistName	NVARCHAR(128) NOT NULL,
-	Title	NVARCHAR(64) NOT NULL,
-	CONSTRAINT [PK_dbo.ArtWorks] PRIMARY KEY CLUSTERED (ArtWorkID ASC),
-	CONSTRAINT FK_ArtistID FOREIGN KEY (ArtistID)
-	REFERENCES Artists(ArtistID)
+    ArtWorkID   INT IDENTITY (1,1) NOT NULL,
+    ArtistID INT,
+    ArtistName  NVARCHAR(128) NOT NULL,
+    Title   NVARCHAR(64) NOT NULL,
+    CONSTRAINT [PK_dbo.ArtWorks] PRIMARY KEY CLUSTERED (ArtWorkID ASC),
+    CONSTRAINT FK_ArtistID FOREIGN KEY (ArtistID)
+    REFERENCES Artists(ArtistID)
 );
 
 CREATE TABLE dbo.Genres
 (
-	--sense Genres is a single column table we dont need to link it to anything VIA a FK 
-	--Genre is linked to others because others (classifications) needs to know about it, 
-	--but it doesnt need to know about anyone else
-	GenreID			INT IDENTITY (1,1) NOT NULL,
-	GenreName	NVARCHAR(64) NOT NULL,
-	CONSTRAINT [PK_dbo.Genres] PRIMARY KEY CLUSTERED (GenreID ASC)
+    --sense Genres is a single column table we dont need to link it to anything VIA a FK 
+    --Genre is linked to others because others (classifications) needs to know about it, 
+    --but it doesnt need to know about anyone else
+    GenreID         INT IDENTITY (1,1) NOT NULL,
+    GenreName   NVARCHAR(64) NOT NULL,
+    CONSTRAINT [PK_dbo.Genres] PRIMARY KEY CLUSTERED (GenreID ASC)
 );
 
 
 CREATE TABLE dbo.Classifications
 (
-	--classifications doesnt have much data (only two columns) but all the data it does have is 
-	--a FK of other tables so we must reference and add them.
-	ClassificationID		INT IDENTITY (1,1) NOT NULL,
-	ArtWork		NVARCHAR(64) NOT NULL,
-	Genre		NVARCHAR(64) NOT NULL,
-	GenreID INT,
-	ArtWorkID INT,
-	CONSTRAINT [PK_dbo.Classifications] PRIMARY KEY CLUSTERED (ClassificationID ASC),
-	--We will add in Genre sense it is used in classifications table so we must have some reference to it
-	CONSTRAINT FK_GenreID FOREIGN KEY (GenreID)
-	REFERENCES Genres(GenreID),
-	--Same as above but with Artwork Table
-	CONSTRAINT FK_ArtWorkID FOREIGN KEY (ArtWorkID)
-	REFERENCES ArtWorks(ArtWorkID)
+    --classifications doesnt have much data (only two columns) but all the data it does have is 
+    --a FK of other tables so we must reference and add them.
+    ClassificationID        INT IDENTITY (1,1) NOT NULL,
+    ArtWork     NVARCHAR(64) NOT NULL,
+    Genre       NVARCHAR(64) NOT NULL,
+    GenreID INT,
+    ArtWorkID INT,
+    CONSTRAINT [PK_dbo.Classifications] PRIMARY KEY CLUSTERED (ClassificationID ASC),
+    --We will add in Genre sense it is used in classifications table so we must have some reference to it
+    CONSTRAINT FK_GenreID FOREIGN KEY (GenreID)
+    REFERENCES Genres(GenreID),
+    --Same as above but with Artwork Table
+    CONSTRAINT FK_ArtWorkID FOREIGN KEY (ArtWorkID)
+    REFERENCES ArtWorks(ArtWorkID)
 );
 
 
@@ -108,46 +108,46 @@ CREATE TABLE dbo.Classifications
 
 --Insert into artists table
 INSERT INTO dbo.Artists (ArtistName,ArtistCity,ArtistDOB) VALUES 
-	('M.C. Escher','Leeuwarden, Netherlands','1898-06-17 00:00:00'),
-	('Leonardo Da Vinci','Vinci, Italy','1519-04-02 00:00:00'),
-	('HAtip Mehmed Efendi','Unknown','1680-10-18 00:00:00'),
-	('Salvador Dali','Leeuwarden, Figueres, Spain','1904-05-11 00:00:00')
+    ('M.C. Escher','Leeuwarden, Netherlands','1898-06-17 00:00:00'),
+    ('Leonardo Da Vinci','Vinci, Italy','1519-04-02 00:00:00'),
+    ('HAtip Mehmed Efendi','Unknown','1680-10-18 00:00:00'),
+    ('Salvador Dali','Leeuwarden, Figueres, Spain','1904-05-11 00:00:00')
 GO
 
 --Insert into ArtWorks table
 INSERT INTO dbo.ArtWorks (ArtistName,Title) VALUES 
-	('M.C. Escher','Circle Limit III'),
-	('M.C. Escher','Twon Tree'),
-	('Leonardo Da Vinci','Mona Lisa'),
-	('Hatip Mehmed Efendi','Ebru'),
-	('Salvador Dali','Honey Is Sweeter Than Blood')
+    ('M.C. Escher','Circle Limit III'),
+    ('M.C. Escher','Twon Tree'),
+    ('Leonardo Da Vinci','Mona Lisa'),
+    ('Hatip Mehmed Efendi','Ebru'),
+    ('Salvador Dali','Honey Is Sweeter Than Blood')
 GO
 
 --Insert into Classifications table
 INSERT INTO dbo.Classifications(Artwork, Genre) VALUES 
-	('Circle Limit III','Tesselation'),
+    ('Circle Limit III','Tesselation'),
     ('Twon Tree','Tesselation'),
-	('Twon Tree','Surrealism'),
-	('Mona Lisa','Portrait'),
-	('Mona Lisa','Renaissance'),
-	('The Vitruvian Man','Renaissance'),
-	('Ebru','Tesselation'),
-	('Honey Is Sweeter Than Blood','Surrealism');
+    ('Twon Tree','Surrealism'),
+    ('Mona Lisa','Portrait'),
+    ('Mona Lisa','Renaissance'),
+    ('The Vitruvian Man','Renaissance'),
+    ('Ebru','Tesselation'),
+    ('Honey Is Sweeter Than Blood','Surrealism');
 GO
 
 --Insert into Classifications table
 INSERT INTO dbo.Genres(GenreName) VALUES 
-	('Tesselation'),
+    ('Tesselation'),
     ('Surrealism'),
-	('Portrait'),
-	('Renaissance');
+    ('Portrait'),
+    ('Renaissance');
 GO
 
 
 ```
 
 
-For my Genre Table and Artist table I did not need to reference any Forien Keys (FK) because the data it had was not data that relied on any other tables. Unlike the Classifications or the Artwork table, which did need FK's. For example the Classifications table needed 2 FK's. One from Genre and one from Artworks. The classifications table essentially didn't have any unique data. Unlike the Artwork table which had a combination of Unique and non unique (Artist) data.
+For my Genre Table and Artist table I did not need to reference any Foreign Keys (FK) because the data it had was not data that relied on any other tables. Unlike the Classifications or the Artwork table, which did need FK's. For example the Classifications table needed 2 FK's. One from Genre and one from Artworks. The classifications table essentially didn't have any unique data. Unlike the Artwork table which had a combination of Unique and non unique (Artist) data.
 
 Once I had my tables created Then I want to go ahead and connect to my data base and then insert the data into it. To do this i had to,
 1: click the connect button next to the empty (white) text box
@@ -183,7 +183,7 @@ The next step:
 Place a menu item on the shared layout to select one of three views: Artists, ArtWorks and Classifications. Each of these views should show all artists, works of art and classifications, respectively, that are in the database. i.e. they are each a list view. Also add a home page with some form of a welcome.
 
 
-TO do this I started by creating the home page. The home page was simple in the sense that all i did to it was remove the auto created code and just put in a few sentinces about art.
+TO do this I started by creating the home page. The home page was simple in the sense that all i did to it was remove the auto created code and just put in a few sentences about art.
 
 Next I went and created the links in the shared layout. to do this I just changed the current links to the new links to pages that I created.
 
@@ -203,7 +203,7 @@ changed to
 
 
 ```html
-      			<ul class="nav navbar-nav">
+                <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Artists", "Artists", "Home")</li>
                     <li>@Html.ActionLink("ArtWorks", "ArtWorks", "Home")</li>
@@ -223,12 +223,12 @@ Next I wanted to auto generate my connect string and my model classes. To do thi
 4: select the code first from database option 
 5: next it will ask "which data connection should your application use and for this I want to click new connection"
 6: in the new window i want to select the data source as a database file and then select the database file name to be my .mdf database I created for the project.
-7: use windows authenitfication and test connection and then connect.
+7: use windows authentication and test connection and then connect.
 8: on the next page I want to save the connection string as what it defaults to. 
-9: select all the tables to be generated, plurilize the names for readability sake and click finish
+9: select all the tables to be generated, pluralize the names for readability sake and click finish
 
 
-If all goes well then the models are now created automatically in the project. However we still need to add restrictions to certain peices of data like not letting an artists birthday be a date in the future.
+If all goes well then the models are now created automatically in the project. However we still need to add restrictions to certain pieces of data like not letting an artist’s birthday be a date in the future.
 
 ## working with models 
 
@@ -344,7 +344,7 @@ with
 
 ```html
 
-		<th>
+        <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
@@ -410,5 +410,28 @@ For our details page The view consited of displayed the data that is searched fo
 
 and if the artist exists then we store the information for the artists in our post controller using viewbags that we will return to the view.
 
+## part 8
+
+For generating my buttons that link to each genre I added in an iEnumerable to my index page using my genere model,
+```cs
+@model IEnumerable<hw8.Models.Genre>
+```
+
+And to display the buttons with a razor loop,
+
+```cs
+
+@foreach (var genre in Model.ToList())
+{
+    <input class="btn btn-primary" style="text-align:center" type="button" value=@genre.GenreName onclick="ajaxCall('@genre.GenreID')" />
+}
+<div class="row" id="tableData"></div>
+
+```
+
+and I have the data returned from my javascript function returned into my tabledata div class.
+
+
+for the ajax my controller looked for the genre id that matched the passed in id and then worked with that to find the artist name and title, converteted it tolist() and then send it back to be saved in ajax where it was appended to my div element above. 
 
 

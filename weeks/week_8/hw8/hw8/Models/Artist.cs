@@ -18,7 +18,7 @@ namespace hw8.Models
 
         [Required]
         [Display(Name = "Artist Name")]
-        [StringLength(128)]
+        [StringLength(50)]
         public string ArtistName { get; set; }
 
         [Required]
@@ -27,6 +27,7 @@ namespace hw8.Models
         public string ArtistCity { get; set; }
 
         [Display(Name = "Artist Birth Day")]
+
         [Column(TypeName = "date")]
         public DateTime ArtistDOB { get; set; }
 
