@@ -9,7 +9,7 @@
 The full code for this assignment can be found [here](https://github.com/kollklienstuber/460/tree/master/weeks/week_8) 
 
 ## Link to project hosted on Azure
-The project can be found [here](azurelink.com) 
+The project can be found [here](http://week8test2app.azurewebsites.net/) 
 
 
 

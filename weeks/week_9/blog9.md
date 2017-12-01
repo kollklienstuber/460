@@ -5,7 +5,7 @@
 
 
 ## Link to project hosted on Azure
-The project can be found [here](azurelink.com) 
+The project can be found [here](http://week8test2app.azurewebsites.net/) 
 
 
 
