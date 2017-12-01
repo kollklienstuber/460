@@ -435,3 +435,8 @@ and I have the data returned from my javascript function returned into my tabled
 for the ajax my controller looked for the genre id that matched the passed in id and then worked with that to find the artist name and title, converteted it tolist() and then send it back to be saved in ajax where it was appended to my div element above. 
 
 
+
+## weird notes
+
+For my connection string in my visual studios project when i upload it to the cloud I had to take the connection string and remove the brackets ({})  that enclosed my username and password. If the brackets stayed then the site would not publish. In the app services under the app and then under application settings however, i paste the connection string but with my passwords and username in the brackets. 
+
