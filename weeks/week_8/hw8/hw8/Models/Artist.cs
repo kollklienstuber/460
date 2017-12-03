@@ -27,8 +27,8 @@ namespace hw8.Models
         public string ArtistCity { get; set; }
 
         [Display(Name = "Artist Birth Day")]
-
         [Column(TypeName = "date")]
+        [dateCheck(ErrorMessage = "Date should be in the future.")]
         public DateTime ArtistDOB { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

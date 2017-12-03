@@ -221,7 +221,7 @@ Next I wanted to auto generate my connect string and my model classes. To do thi
 2: add new item
 3: on the code tab select data and then select ado.net entity data model and give it a name. 
 4: select the code first from database option 
-5: next it will ask "which data connection should your application use and for this I want to click new connection"
+5: next it will ask "which data connection should your application use and for this is dont click new connection, i just open the drop down and select my database. "
 6: in the new window i want to select the data source as a database file and then select the database file name to be my .mdf database I created for the project.
 7: use windows authentication and test connection and then connect.
 8: on the next page I want to save the connection string as what it defaults to. 
@@ -409,6 +409,14 @@ For our details page The view consited of displayed the data that is searched fo
 ```cs Artist artist = db.ArtWork.Find(id); ```
 
 and if the artist exists then we store the information for the artists in our post controller using viewbags that we will return to the view.
+
+
+## part 7
+
+
+for attribute checking for the date I used a format similar to a date restrictor that restricted dates to only be in the future, modified it so it only accepts dates in the past, and implimented it into my project. 
+[link to help from stack overflow](https://stackoverflow.com/questions/14945536/mvc-validate-date-time-is-at-least-1-minute-in-the-future) 
+
 
 ## part 8
 
