@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FinalFix.Models.Item>
+@{
+    ViewBag.Title = "Items";
+}
+
+
+<h2 style="text-align:center">Data from Artists table:</h2>
+
+<div class="btn-group">
+    @Html.ActionLink("Create an Item", "ItemCreate", "Home", null, new { @class = "btn btn-primary" })
+</div>
+
+<table class="table" style="border: 5px solid black;">
+    <tr style="border: 5px solid black;">
+        <th style="border: 5px solid black;">
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr style="border: 5px solid black;">
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details of Item", "ItemRead", new { id = item.ItemID })
+            </td>
+            <td>
+                @Html.ActionLink("Edit Item", "ItemUpdate", new { id = item.ItemID })
+            </td>
+            <td>
+                @Html.ActionLink("Delete Item", "ItemDelete", new { id = item.ItemID })
+            </td>
+        </tr>
+    }
+
+
+
+
+
+</table>

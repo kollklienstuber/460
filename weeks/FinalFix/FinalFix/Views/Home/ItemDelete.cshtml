@@ -1,0 +1,30 @@
+﻿@model FinalFix.Models.Item
+
+@{
+    ViewBag.Title = "ArtistDelete";
+}
+<h2>Delete</h2>
+<h3>Are you sure you want to delete this Item from the database?</h3>
+<div>
+    <h4>Item to delete!</h4>
+    <hr />
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+    </dl>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="remove" class="btn btn-primary" /> |
+            @Html.ActionLink("Back to items", "Items")
+        </div>
+    }
+</div>
