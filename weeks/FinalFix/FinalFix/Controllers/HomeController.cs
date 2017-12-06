@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Net;
+using System.Data.Entity;
 
 namespace FinalFix.Controllers
 {
@@ -26,8 +27,8 @@ namespace FinalFix.Controllers
         }
 
 
-        //itemRead
 
+        //itemread----------------------------------------------itemread--------------------------------
 
 
         //get artist details
@@ -42,78 +43,127 @@ namespace FinalFix.Controllers
 
             //using viewbags to palce the given items information to return later to user.
             ViewBag.ItemName = item.ItemName;
-            ViewBag.ItemDescription = item.ItemDescription;
             ViewBag.ItemSeller = item.Seller;
-
-
-
+            ViewBag.ItemDescription = item.ItemDescription;
             var items = db.Items.Where(c => c.ItemID == id).Select(c => c.ItemName);
 
             return View(item);
         }
 
 
+        //item Update-----------------------------------------------item Update-----------------------------
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Item item = db.Items.Find(id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            return View(item);
+        }
 
-        //item delete-----------------------------
+        // POST: update
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ItemID, ItemName, ItemDescription, SellerName")] Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Items");
+            }
+            return View(item);
+        }
 
-        // GET: Delete
+
+        //item delete-----------------------------------------------item delete-----------------------------
+
         public ActionResult ItemDelete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Item Items = db.Items.Find(id);
-            if (Items == null)
+            Item item = db.Items.Find(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(Items);
+            return View(item);
         }
 
-
-        //Post delete
+        // POST: Delete
         [HttpPost, ActionName("ItemDelete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Item items = db.Items.Find(id);
-            db.Items.Remove(items);
+            Item item = db.Items.Find(id);
+            db.Items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Items");
         }
 
 
+        //item CREATE-----------------------------------------------item CREATE-----------------------------
+
+        // our get for creating an Item
+        public ActionResult ItemCreate()
+        {
+            return View();
+        }
+
+        //post item
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ItemCreate([Bind(Include = "ItemID, ItemName, ItemDescription, SellerName")] Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Items.Add(item);
+                db.SaveChanges();
+                return RedirectToAction("Items");
+            }
+
+            return View(item);
+        }
 
 
 
 
+        //BIDS----------------------------------------------------bids---------------------------
 
 
-
-        //bids----------------------------------------------------bids---------------------------
-
-
-        // our get for creating an artist
+        //GET bid
         public ActionResult BidCreate()
         {
             return View();
         }
 
-        //post artist
+        //POST bid
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult BidCreate([Bind(Include = "BidID, Bid, ArtistDOB, ArtistCity")] Bid bid)
+        public ActionResult BidCreate([Bind(Include = "ItemID, BuyerName, PriceOfItem, TimeOfBid")] Bid bid)
         {
             if (ModelState.IsValid)
             {
                 db.Bids.Add(bid);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Items");
             }
 
             return View(bid);
         }
+
+    
+
+
+
+
 
 
 
